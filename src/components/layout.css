@@ -1,0 +1,33 @@
+/**
+mwgaBlack #1A1D22
+mwgaTextWhite #F4F9FF
+mwgaTextGray #858585
+mwgaAccentOrange #FF4D00
+mwgaAccentGreen #B1D716
+mwgaAccentBlue #6A9FB5
+*/
+
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background: rgb(48, 48, 48);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.root {
+  width: 100%;
+  height: 100%;
+}
+
+.layout-wrapper {
+  display: 'flex';
+  flex-direction: 'row wrap';
+  width: 100%;
+  height: 100%;
+  position: relative;
+}

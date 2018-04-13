@@ -1,8 +1,16 @@
+import 'babel-polyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import configureStore from './store/configure-store';
+import routes from './routes';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const store = configureStore();
+
+render(
+    <Provider store={store}>
+        <Router history={browserHistory} routes={routes} />
+    </Provider>,
+    document.getElementById('root')
+);
