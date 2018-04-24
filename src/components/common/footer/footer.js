@@ -8,16 +8,37 @@ class Footer extends React.Component {
     }
 
     render() {
+        const links = [
+            {
+                route: '/home',
+                label: 'home'
+            },
+            {
+                route: '/login',
+                label: 'login'
+            },
+            {
+                route: '/players',
+                label: 'players'
+            },
+            {
+                route: '/player/add',
+                label: 'add player'
+            }
+        ];
         return (
             <footer>
-                <div>
-                    <button onClick={() => {
-                        this.routeTo('/home');
-                    }}>home</button>
-                    <button onClick={() => {
-                        this.routeTo('/login');
-                    }}>login</button>
-                </div>
+                {links.map((link, index) => {
+                    return (
+                        <button
+                            key={index}
+                            className="btn btn-primary" onClick={() => {
+                                this.routeTo(link.route);
+                            }}>
+                            {link.label}
+                        </button>
+                    );
+                })}
             </footer>
         );
     }

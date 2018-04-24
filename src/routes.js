@@ -5,6 +5,9 @@ import Layout from './components/layout.js';
 import HomePage from './components/pages/home/home-page';
 import LoginPage from './components/pages/login/login-page';
 
+import Players from './components/pages/players/players';
+import PlayerAdd from './components/pages/player/player-add';
+
 import Redirector from './services/redirector';
 
 function onRouteChange(previous, next) {
@@ -20,6 +23,8 @@ export default (
         <IndexRedirect to="home" />
         <Route path="home" component={HomePage} />
         <Route path="login" component={LoginPage} />
+        <Route path="players" component={Players} />
+        <Route path="player/add" component={PlayerAdd} />
         <Redirect from="*" to="home" />
     </Route>
 );

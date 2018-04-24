@@ -1,4 +1,4 @@
-import Ajax from '../services/ajax';
+import Fetch from '../services/fetch';
 
 class Poller {
     constructor() {
@@ -9,7 +9,7 @@ class Poller {
     run(request, time) {
         if (!this.intervals[request.id]) {
             const interval = setInterval(function () {
-                Ajax.get(request).then(request.success).catch(request.error);
+                Fetch.get(request).then(request.success).catch(request.error);
             }, time || 5000);
 
             this.intervals[request.id] = interval;

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 //import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import Dialog from './common/dialog/dialog';
+import Loader from './common/loader/loader';
+import Toast from './common/toast/toast';
 import Footer from './common/footer/footer';
 import '../assets/css/flexboxgrid.min.css';
 import '../assets/css/font-awesome.min.css';
@@ -21,6 +23,8 @@ class Layout extends Component {
     render() {
         return (
             <div className="layout-wrapper">
+                <Loader />
+                <Toast />
                 <Dialog />
                 {this.props.children}
                 <Footer />

@@ -1,0 +1,12 @@
+.toast {
+    left: 50%;
+}
+
+.toast .alert {
+    left: -50%;
+    min-width: 300px;
+}
+
+.toast.hidden {
+    display: none;
+}
