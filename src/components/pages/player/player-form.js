@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
-
 import Fetch from '../../../services/fetch';
-
+import Footer from '../../common/footer/footer';
 import * as playersActions from '../../../actions/players-actions';
 import * as loaderActions from '../../../actions/loader-actions';
 import * as toastActions from '../../../actions/toast-actions';
@@ -34,7 +33,7 @@ class PlayerForm extends Component {
             this.redirectToPlayers();
         } else {
             this.setState({
-                player: this.props.players.find(player => player.id === this.props.playerId)
+                player: this.props.players.find(player => player.id === this.props.params.id)
             });
         }
     }
@@ -130,31 +129,34 @@ class PlayerForm extends Component {
             btnLabel = current ? 'Update' : 'Add';
 
         return (
-            <div className="player-add-form form-group">
-                <fieldset>
-                    <input
-                        className="form-control"
-                        name="firstname"
-                        type="text"
-                        placeholder="first name"
-                        onChange={this.handleInputChange}
-                        value={current ? current.firstname : ''}
-                    />
-                    <input
-                        className="form-control"
-                        name="lastname"
-                        type="text"
-                        placeholder="last name"
-                        onChange={this.handleInputChange}
-                        value={current ? current.lastname : ''}
-                    />
-                </fieldset>
-                <button
-                    className="btn btn-primary"
-                    onClick={this.send}
-                >
-                    {btnLabel}
-                </button>
+            <div className="page-player-form">
+                <div className="form-group">
+                    <fieldset>
+                        <input
+                            className="form-control"
+                            name="firstname"
+                            type="text"
+                            placeholder="first name"
+                            onChange={this.handleInputChange}
+                            value={current ? current.firstname : ''}
+                        />
+                        <input
+                            className="form-control"
+                            name="lastname"
+                            type="text"
+                            placeholder="last name"
+                            onChange={this.handleInputChange}
+                            value={current ? current.lastname : ''}
+                        />
+                    </fieldset>
+                    <button
+                        className="btn btn-primary"
+                        onClick={this.send}
+                    >
+                        {btnLabel}
+                    </button>
+                </div>
+                <Footer />
             </div>
         );
     }

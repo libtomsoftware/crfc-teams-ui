@@ -22,6 +22,8 @@ class Players extends Component {
         super();
 
         this.onPlayersFetched = this.onPlayersFetched.bind(this);
+        this.onEditPlayerClick = this.onEditPlayerClick.bind(this);
+        this.onInfoPlayerClick = this.onInfoPlayerClick.bind(this);
         this.onRemovePlayerClick = this.onRemovePlayerClick.bind(this);
         this.onPlayersFetchFailure = this.onPlayersFetchFailure.bind(this);
     }
@@ -35,16 +37,27 @@ class Players extends Component {
         event.preventDefault();
         event.stopPropagation();
 
-        this.deletePlayer(event.target.rel);
+        if (this.confirm(CONFIG.MESSAGE.CONFIRM.REMOVE_PLAYER)) {
+            this.deletePlayer(event.target.rel);
+        }
     }
 
     onEditPlayerClick(event) {
         event.preventDefault();
         event.stopPropagation();
 
-        if (window.confirm('Do you want to edit player details?')) { //eslint-disable-line
-            browserHistory.push(`player/${event.target.rel}`);
-        }
+        browserHistory.push(`player/edit/${event.target.rel}`);
+    }
+
+    onInfoPlayerClick(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        browserHistory.push(`player/${event.target.rel}`);
+    }
+
+    confirm(message) {
+        return window.confirm(message); //eslint-disable-line
     }
 
     fetchPlayers() {
@@ -117,6 +130,19 @@ class Players extends Component {
     }
 
     render() {
+        const getContextLinks = function (id, data) {
+            return data.map((entry, index) => {
+                return (<td key={index} className={entry.className}>
+                    <a
+                        href="#"
+                        className={`'btn btn-link fas ${entry.icon}`}
+                        rel={id}
+                        onClick={entry.action}
+                    />
+                </td>);
+            });
+        };
+
         return (
             <div className="page-players">
                 {
@@ -137,22 +163,23 @@ class Players extends Component {
                                         <tr key={index}>
                                             <td>{player.firstname}</td>
                                             <td>{player.lastname}</td>
-                                            <td className="player-edit">
-                                                <a
-                                                    href="#"
-                                                    className="btn btn-link fas fa-edit"
-                                                    rel={player.id}
-                                                    onClick={this.onEditPlayerClick}
-                                                />
-                                            </td>
-                                            <td className="player-remove">
-                                                <a
-                                                    href="#"
-                                                    className="btn btn-link fas fa-times"
-                                                    rel={player.id}
-                                                    onClick={this.onRemovePlayerClick}
-                                                />
-                                            </td>
+                                            {getContextLinks(player.id, [
+                                                {
+                                                    action: this.onInfoPlayerClick,
+                                                    className: 'player-info',
+                                                    icon: 'fa-info'
+                                                },
+                                                {
+                                                    action: this.onEditPlayerClick,
+                                                    className: 'player-edit',
+                                                    icon: 'fa-edit'
+                                                },
+                                                {
+                                                    action: this.onRemovePlayerClick,
+                                                    className: 'player-remove',
+                                                    icon: 'fa-times'
+                                                }
+                                            ])}
                                         </tr>
                                     );
                                 })}
@@ -161,7 +188,7 @@ class Players extends Component {
                         <a
                             href="#"
                             className="btn btn-secondary" onClick={event => {
-                                this.routeTo(event, '/player');
+                                this.routeTo(event, '/player/add');
                             }}>
                             <i className="fas fa-user-plus" />
                         </a>
