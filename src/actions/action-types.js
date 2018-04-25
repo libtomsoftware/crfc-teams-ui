@@ -6,3 +6,5 @@ export const LOADER_SHOW = 'LOADER_SHOW'; //eslint-disable-line one-var
 export const LOADER_HIDE = 'LOADER_HIDE'; //eslint-disable-line one-var
 export const TOAST_SHOW = 'TOAST_SHOW'; //eslint-disable-line one-var
 export const TOAST_HIDE = 'TOAST_HIDE'; //eslint-disable-line one-var
+export const MENU_SHOW = 'MENU_SHOW'; //eslint-disable-line one-var
+export const MENU_HIDE = 'MENU_HIDE'; //eslint-disable-line one-var

@@ -6,7 +6,7 @@ import HomePage from './components/pages/home/home-page';
 import LoginPage from './components/pages/login/login-page';
 
 import Players from './components/pages/players/players';
-import PlayerAdd from './components/pages/player/player-add';
+import Player from './components/pages/player/player';
 
 import Redirector from './services/redirector';
 
@@ -24,7 +24,8 @@ export default (
         <Route path="home" component={HomePage} />
         <Route path="login" component={LoginPage} />
         <Route path="players" component={Players} />
-        <Route path="player/add" component={PlayerAdd} />
+        <Route path="player" component={Player} />
+        <Route path="player/:id" component={Player} />
         <Redirect from="*" to="home" />
     </Route>
 );

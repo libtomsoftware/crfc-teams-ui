@@ -21,7 +21,7 @@ class Toast extends Component {
         const toast = this.props.toast;
 
         return (
-            <div className={'toast' + (toast ? ' visible' : ' hidden')}>
+            <div className={'toast animated fadeInDown' + (toast ? ' visible' : ' hidden')}>
                 {
                     (toast !== null) &&
                     <div className={`alert alert-${toast.type}`}>

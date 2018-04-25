@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
+
 import Footer from '../../common/footer/footer';
 import Fetch from '../../../services/fetch';
 
@@ -36,6 +38,15 @@ class Players extends Component {
         this.deletePlayer(event.target.rel);
     }
 
+    onEditPlayerClick(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (window.confirm('Do you want to edit player details?')) { //eslint-disable-line
+            browserHistory.push(`player/${event.target.rel}`);
+        }
+    }
+
     fetchPlayers() {
         this.props.actions.loader.show();
         Fetch
@@ -55,7 +66,7 @@ class Players extends Component {
 
     onPlayersFetchFailure() {
         this.props.actions.toast.show({
-            message: 'Failed to load players!',
+            message: CONFIG.MESSAGE.ERROR.FAILED_TO_LOAD_PLAYERS,
             type: 'danger'
         });
     }
@@ -74,7 +85,7 @@ class Players extends Component {
     onPlayerDelete(status, id) {
         if (status !== 200) {
             this.props.actions.toast.show({
-                message: 'Failed to delete player!',
+                message: CONFIG.MESSAGE.ERROR.FAILED_TO_DELETE_PLAYER,
                 type: 'warning'
             });
             return;
@@ -98,32 +109,62 @@ class Players extends Component {
         this.props.actions.loader.hide();
     }
 
+    routeTo(event, path) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        browserHistory.push(path);
+    }
+
     render() {
         return (
             <div className="page-players">
                 {
                     !this.shouldDisplayPlayersList() &&
                     !this.props.loader &&
-                    <div className="alert alert-info">
+                    !this.props.toast &&
+                    <p>
                         No players to display.
-                    </div>
+                    </p>
                 }
                 {
                     this.shouldDisplayPlayersList() &&
                     <div className="players-list">
-                        {this.props.players.map((player, index) => {
-                            return (<div key={index}>
-                                {player.firstname} {player.lastname}
-                                <a
-                                    href="#"
-                                    className="btn btn-link"
-                                    rel={player.id}
-                                    onClick={this.onRemovePlayerClick}
-                                >
-                                    x
-                                </a>
-                            </div>);
-                        })}
+                        <table className="table table-hover">
+                            <tbody>
+                                {this.props.players.map((player, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{player.firstname}</td>
+                                            <td>{player.lastname}</td>
+                                            <td className="player-edit">
+                                                <a
+                                                    href="#"
+                                                    className="btn btn-link fas fa-edit"
+                                                    rel={player.id}
+                                                    onClick={this.onEditPlayerClick}
+                                                />
+                                            </td>
+                                            <td className="player-remove">
+                                                <a
+                                                    href="#"
+                                                    className="btn btn-link fas fa-times"
+                                                    rel={player.id}
+                                                    onClick={this.onRemovePlayerClick}
+                                                />
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                        <a
+                            href="#"
+                            className="btn btn-secondary" onClick={event => {
+                                this.routeTo(event, '/player');
+                            }}>
+                            <i className="fas fa-user-plus" />
+                        </a>
                     </div>
                 }
                 <Footer />
