@@ -5,13 +5,44 @@
     align-items: center;
 }
 
+.players-list {
+    width: 80%;
+    padding: 5%;
+}
+
 .players-list table td {
     vertical-align: middle;
 }
 
+.context-menu-link {
+    text-align: center;
+}
+
+.context-menu-link a {
+    width: 100%;
+    height: 100%;
+}
+
+.context-menu-link:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.players-list table td .fas {
+    color: #666;
+}
+
+/* info user btn */
+.players-list table td .fa-info-circle {
+    text-decoration: none;
+}
+
+.players-list table td.player-info:hover .fa-info-circle {
+    color: rgba(55, 90, 127, 1);
+}
+
 /* edit user btn */
 .players-list table td .fa-edit {
-    color: rgba(0, 188, 140, 0.5);
     text-decoration: none;
 }
 
@@ -21,7 +52,6 @@
 
 /* remove user btn */
 .players-list table td .fa-times {
-    color: rgba(231, 76, 60, 0.5);
     text-decoration: none;
 }
 

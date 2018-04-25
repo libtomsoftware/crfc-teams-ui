@@ -10,4 +10,16 @@
 .toast {
   position: fixed;
   top: 10px;
+  z-index: 1000;
+}
+
+.navbar {
+  padding: 6px 0;
+}
+
+.fas {
+  display: inline-block;
+  font-size: 1.4em;
+  padding: 4px 8px;
+  text-align: center;
 }

@@ -2,6 +2,18 @@ import fetch from 'isomorphic-fetch';
 import { CONFIG } from '../config-constants';
 
 class Fetch {
+    constructor() {
+
+        [
+            'get',
+            'post',
+            'put',
+            'delete'
+        ].forEach(method => {
+            this[method] = this[method].bind(this);
+        });
+    }
+
     send(method, request) {
         const isGetReq = method === 'GET';
         let details;

@@ -132,7 +132,7 @@ class Players extends Component {
     render() {
         const getContextLinks = function (id, data) {
             return data.map((entry, index) => {
-                return (<td key={index} className={entry.className}>
+                return (<td key={index} className={`context-menu-link ${entry.className}`}>
                     <a
                         href="#"
                         className={`'btn btn-link fas ${entry.icon}`}
@@ -167,7 +167,7 @@ class Players extends Component {
                                                 {
                                                     action: this.onInfoPlayerClick,
                                                     className: 'player-info',
-                                                    icon: 'fa-info'
+                                                    icon: 'fa-info-circle'
                                                 },
                                                 {
                                                     action: this.onEditPlayerClick,

@@ -32,9 +32,29 @@ class PlayerDetails extends Component {
     render() {
         return (
             <div className="page-player-details">
-                <div className="player-details-container">
-                    {this.state.player.firstname} {this.state.player.lastname}
-                </div>
+                {
+                    this.state.player !== null &&
+                    <div className="player-details-container">
+
+                        <div className="card card-player mb-3">
+                            <div className="card-header">Player</div>
+                            <div className="card-body">
+                                <div className="card-title">{this.state.player.firstname} {this.state.player.lastname}</div>
+                                <p className="card-text">text</p>
+                            </div>
+                        </div>
+
+                        <div className="card bg-secondary mb-3">
+                            <div className="card-header">Guardians</div>
+                            <div className="card-body">
+                                <div className="card-title">{this.state.player.firstname} {this.state.player.lastname}</div>
+                                <p className="card-text">text</p>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
                 <Footer />
             </div>
         );

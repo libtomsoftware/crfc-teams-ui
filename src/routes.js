@@ -9,13 +9,13 @@ import Players from './components/pages/players/players';
 import PlayerForm from './components/pages/player/player-form';
 import PlayerDetails from './components/pages/player/player-details';
 
-import Redirector from './services/redirector';
+//import Redirector from './services/redirector';
 
 function onRouteChange(previous, next) {
     window.scrollTo(0, 0);
 
     if (next.location.pathname !== '/login') {
-        Redirector.start();
+        //Redirector.start();
     }
 }
 
