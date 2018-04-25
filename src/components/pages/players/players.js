@@ -188,7 +188,7 @@ class Players extends Component {
                         <a
                             href="#"
                             className="btn btn-secondary" onClick={event => {
-                                this.routeTo(event, '/player/add');
+                                this.routeTo(event, '/player');
                             }}>
                             <i className="fas fa-user-plus" />
                         </a>

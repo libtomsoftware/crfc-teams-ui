@@ -25,8 +25,8 @@ export default (
         <Route path="home" component={HomePage} />
         <Route path="login" component={LoginPage} />
         <Route path="players" component={Players} />
+        <Route path="player" component={PlayerForm} />
         <Route path="player/:id" component={PlayerDetails} />
-        <Route path="player/add" component={PlayerForm} />
         <Route path="player/edit/:id" component={PlayerForm} />
         <Redirect from="*" to="home" />
     </Route>
