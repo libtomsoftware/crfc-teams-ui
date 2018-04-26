@@ -30,6 +30,8 @@ class PlayerDetails extends Component {
     }
 
     render() {
+        const dob = this.state.player && this.state.player.dob;
+
         return (
             <div className="page-player-details">
                 {
@@ -40,15 +42,15 @@ class PlayerDetails extends Component {
                             <div className="card-header">Player</div>
                             <div className="card-body">
                                 <div className="card-title">{this.state.player.firstname} {this.state.player.lastname}</div>
-                                <p className="card-text">text</p>
+                                <p className="card-text">DOB {`${dob.day} of ${dob.month} ${dob.year}`} </p>
                             </div>
                         </div>
 
                         <div className="card bg-secondary mb-3">
-                            <div className="card-header">Guardians</div>
+                            <div className="card-header">Guardian</div>
                             <div className="card-body">
-                                <div className="card-title">{this.state.player.firstname} {this.state.player.lastname}</div>
-                                <p className="card-text">text</p>
+                                <div className="card-title">{this.state.player.guardianFirstname} {this.state.player.guardianLastname}</div>
+                                <p className="card-text">Email: {this.state.player.email}</p>
                             </div>
                         </div>
 
