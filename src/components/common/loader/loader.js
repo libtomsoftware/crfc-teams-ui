@@ -6,6 +6,10 @@ import * as loaderActions from '../../../actions/loader-actions';
 import './loader.css';
 
 class Loader extends Component {
+    updateSettings() {
+        console.warn('update settings');
+    }
+
     render() {
         return (
             <div className={'loader' + (this.props.loader ? ' visible' : ' hidden')}>
@@ -32,7 +36,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            players: bindActionCreators(loaderActions, dispatch)
+            loader: bindActionCreators(loaderActions, dispatch)
         }
     };
 }

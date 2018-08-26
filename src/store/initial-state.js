@@ -1,12 +1,8 @@
-import { CONFIG } from '../config-constants';
-
 export default {
-    config: CONFIG,
+    account: null,
+    accounts: [],
+    categories: [],
     loader: false,
-    toast: null,
-    dialog: {
-        title: null,
-        content: null
-    },
-    players: []
+    menu: false,
+    toast: null
 };

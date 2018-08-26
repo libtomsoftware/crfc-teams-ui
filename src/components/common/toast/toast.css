@@ -4,9 +4,15 @@
 
 .toast .alert {
     left: -50%;
-    min-width: 300px;
+    min-width: 450px;
 }
 
 .toast.hidden {
     display: none;
+}
+
+@media screen and (max-width: 450px) {
+    .toast .alert {
+        min-width: 300px;
+    }
 }

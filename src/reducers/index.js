@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
-import config from './config';
-import dialog from './dialog';
-import players from './players';
+import account from './account';
+import accounts from './accounts';
+import categories from './categories';
 import loader from './loader';
+import menu from './menu';
 import toast from './toast';
 
 const rootReducer = combineReducers({
-    config,
-    dialog,
-    players,
+    account,
+    accounts,
+    categories,
     loader,
+    menu,
     toast
 });
 

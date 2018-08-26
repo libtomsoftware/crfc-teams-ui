@@ -1,0 +1,41 @@
+.table-component table {
+    width: 100%;
+}
+
+.table-component td,
+.table-item-actions a {
+    vertical-align: middle;
+}
+
+.table-item-actions {
+    display: flex;
+}
+
+.table-component tbody tr:first-child td.table-item-actions {
+    border-top: 0;
+}
+
+.table-component .table-item-actions a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+}
+
+.table-item-actions a i.fas {
+    vertical-align: middle;
+}
+
+.table-component .table-item-actions a i.fa-edit {
+    color: #F39C12;
+}
+
+.table-component .table-item-actions a i.fa-times {
+    color: #E74C3C;
+}
+
+.standard-table {
+    text-align: center;
+}

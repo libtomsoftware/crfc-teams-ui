@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 import { PropTypes } from 'prop-types';
 import * as menuActions from '../../../actions/menu-actions';
+import * as accountActions from '../../../actions/account-actions';
+import Cookies from '../../../services/cookies';
+import { CONFIG } from '../../../config-constants';
 import './navbar.css';
 
 class Navbar extends Component {
@@ -11,24 +14,80 @@ class Navbar extends Component {
     constructor() {
         super();
 
-        this.links = [
+        this.toggleMenu = this.toggleMenu.bind(this);
+    }
+
+    get account() {
+        return this.props && this.props.account ? this.props.account : {};
+    }
+
+    get links() {
+        return [
             {
                 route: '/home',
                 label: 'home',
-                icon: 'fa-home'
+                icon: 'fa-home',
+                reqLogin: false
             },
             {
-                route: '/players',
-                label: 'players',
-                icon: 'fa-users'
+                route: '/account/edit',
+                label: 'account',
+                icon: 'fa-user-tie',
+                reqLogin: true,
+                param: this.account._id
+            },
+            {
+                route: '/settings',
+                label: 'settings',
+                icon: 'fa-cog',
+                reqLogin: true
+            },
+            {
+                route: '/managers',
+                label: 'managers',
+                icon: 'fa-user-friends',
+                reqLogin: true,
+                rank: 1,
+                separator: true
             }
         ];
     }
 
-    routeTo(event, path) {
+    routeTo(event, path, param) {
         event.preventDefault();
         event.stopPropagation();
+        this.props.actions.menu.hide();
+
+        if (param) {
+            path = `${path}/${param}`;
+        }
+
         browserHistory.push(path);
+    }
+
+    isLoggedIn() {
+        const token = Cookies.read('footy-token');
+        const userData = sessionStorage.getItem(CONFIG.STORAGE_KEY.SESSION.USER_DATA);
+
+        if (token && userData && !this.props.account) {
+            const userDataParsed = JSON.parse(userData);
+
+            this.props.actions.account.update(userDataParsed);
+        }
+
+        return this.props.account;
+    }
+
+    hasEnoughRank(rank) {
+        if (!rank) {
+            return true;
+        }
+
+        return this.props.account.rank <= rank;
+    }
+
+    toggleMenu() {
+        this.props.actions.menu[!this.props.menu ? 'show' : 'hide']();
     }
 
     render() {
@@ -41,23 +100,36 @@ class Navbar extends Component {
                 <button
                     className="navbar-toggler"
                     type="button"
+                    onClick={this.toggleMenu}
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                <div className="collapse navbar-collapse">
+                <div className={`collapse navbar-collapse ${this.props.menu ? 'show' : ''}`}>
                     <ul className="navbar-nav mr-auto">
                         {this.links.map((link, index) => {
-                            return (
-                                <li className="nav-item" key={index}>
+                            const isShown = !link.reqLogin || (link.reqLogin && this.isLoggedIn() && this.hasEnoughRank(link.rank));
+
+                            return (isShown ?
+                                <li className={`nav-item ${link.separator ? 'separator' : ''}`} key={index}>
                                     <a href="#" className="nav-link" title={link.label} onClick={event => {
-                                        this.routeTo(event, link.route);
+                                        this.routeTo(event, link.route, link.param);
                                     }}>
                                         <i className={`fas ${link.icon}`} />
+                                        <span>{link.label}</span>
                                     </a>
-                                </li>
-                            );
+                                </li> : null);
                         })}
+                        {!this.isLoggedIn() &&
+                            <li className="nav-item">
+                                <a href="#" className="nav-link" title="Log in" onClick={event => {
+                                    this.routeTo(event, '/login');
+                                }}>
+                                    <i className="fas fa-sign-in-alt" />
+                                    <span>Log in</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </nav>
@@ -67,19 +139,21 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-    menu: PropTypes.object
+    menu: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        menu: state.menu
+        menu: state.menu,
+        account: state.account
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            menu: bindActionCreators(menuActions, dispatch)
+            menu: bindActionCreators(menuActions, dispatch),
+            account: bindActionCreators(accountActions, dispatch)
         }
     };
 }

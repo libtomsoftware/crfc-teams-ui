@@ -1,0 +1,51 @@
+.layout-wrapper {
+  display: 'flex';
+  flex-direction: 'row wrap';
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.loader,
+.toast {
+  position: fixed;
+  bottom: 10px;
+  z-index: 1000;
+}
+
+.navbar {
+  padding: 6px 0;
+}
+
+.fas {
+  display: inline-block;
+  font-size: 1.4em;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+.page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.form-field-invalid input {
+  border-color: #E74C3C;
+  box-shadow: 0 0 10px #E74C3C;
+}
+
+a, .btn-link {
+  color: #3498DB;
+}
+
+a:hover, .btn-link:hover {
+  color: #999;
+}
+
+.jumbotron {
+  padding: 2rem;
+}

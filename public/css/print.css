@@ -1,0 +1,16 @@
+.navbar,
+.cp-invoice-footer-border,
+.cp-invoice-quick-menu {
+  display: none;
+}
+
+* {
+  color: black !important;
+  text-decoration: none !important;
+  background: transparent !important;
+}
+
+.cp-invoice p span,
+.cp-invoice-services .summary-subtotal .summary-data {
+  color: #666 !important;
+}

@@ -21,7 +21,7 @@ class Toast extends Component {
         const toast = this.props.toast;
 
         return (
-            <div className={'toast animated fadeInDown' + (toast ? ' visible' : ' hidden')}>
+            <div className={'toast animated fadeInUp' + (toast ? ' visible' : ' hidden')}>
                 {
                     (toast !== null) &&
                     <div className={`alert alert-${toast.type}`}>
@@ -32,7 +32,8 @@ class Toast extends Component {
                             &times;
                         </button>
                         {toast.heading !== undefined && <h4 className="alert-heading">{toast.heading}</h4>}
-                        <p className="mb-0">{toast.message}</p>
+                        <p className="mb-0 toast-message">{toast.message}</p>
+                        {!!toast.details && <p className="mb-0 toast-details">{toast.details}</p>}
                     </div>
                 }
             </div>

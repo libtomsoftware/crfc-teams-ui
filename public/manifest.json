@@ -1,6 +1,6 @@
 {
-  "short_name": "Footy Assistant",
-  "name": "Footbal Manager's Assistant",
+  "short_name": "footy-assistant-ui",
+  "name": "Footy Assistant UI",
   "icons": [
     {
       "src": "favicon.ico",
