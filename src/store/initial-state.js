@@ -1,8 +1,10 @@
 export default {
     account: null,
     accounts: [],
-    categories: [],
+    agegroups: [],
+    leagues: [],
     loader: false,
     menu: false,
+    teams: [],
     toast: null
 };

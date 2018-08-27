@@ -1,11 +1,11 @@
 import * as types from '../actions/action-types';
 import initialState from '../store/initial-state';
 
-export default function categoriesReducer(state = initialState.categories, action) {
+export default function agegroupsReducer(state = initialState.agegroups, action) {
 
     switch (action.type) {
-    case types.CATEGORIES_UPDATE:
-        return action.categories;
+    case types.AGEGROUPS_UPDATE:
+        return action.agegroups;
     default:
         return state;
     }

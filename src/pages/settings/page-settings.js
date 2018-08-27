@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as accountActions from '../../actions/account-actions';
+import * as accountsActions from '../../actions/accounts-actions';
 import Footer from '../../components/common/footer/footer';
 import './page-settings.css';
 
@@ -14,7 +14,7 @@ class PageSettings extends Component {
     }
 
     logout() {
-        this.props.actions.account.logout();
+        this.props.actions.accounts.logout();
     }
 
     render() {
@@ -26,9 +26,9 @@ class PageSettings extends Component {
                     </div>
                     <Link
                         className="list-group-item list-group-item-action"
-                        to={'/settings/categories'}
+                        to={'/settings/agegroups'}
                     >
-                        Categories
+                        Age Groups
                     </Link>
                     <Link
                         className="list-group-item list-group-item-action"
@@ -46,7 +46,7 @@ class PageSettings extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            account: bindActionCreators(accountActions, dispatch)
+            accounts: bindActionCreators(accountsActions, dispatch)
         }
     };
 }

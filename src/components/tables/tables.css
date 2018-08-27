@@ -1,5 +1,14 @@
+.table-component {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .table-component table {
     width: 100%;
+}
+
+.table-component h3 {
+    margin-top: 6px;
 }
 
 .table-component td,
@@ -38,4 +47,44 @@
 
 .standard-table {
     text-align: center;
+}
+
+.standard-table.jumbotron {
+    margin-bottom: 12px;
+}
+
+.standard-table-top,
+.standard-table-bottom {
+    margin: 0;
+    padding: 0 6px;
+    text-align: right;
+}
+
+.standard-table-top {
+    float: right;
+    position: relative;
+    top: -6px;
+}
+
+.standard-table-top a,
+.standard-table-bottom a {
+    display: inline-block;
+    margin: 0 6px;
+}
+
+.standard-table-bottom span {
+    display: block;
+}
+
+.standard-table th,
+.standard-table td {
+    text-align: left;
+}
+
+.standard-table th:last-child {
+    text-align: center;
+}
+
+.standard-table .table-item-actions {
+    justify-content: center;
 }

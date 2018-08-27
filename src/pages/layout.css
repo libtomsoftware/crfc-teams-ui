@@ -1,3 +1,9 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
 .layout-wrapper {
   display: 'flex';
   flex-direction: 'row wrap';
@@ -25,12 +31,12 @@
 }
 
 .page {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   padding: 10px 0;
+  height: 100%;
 }
 
 .form-field-invalid input {

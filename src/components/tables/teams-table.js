@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import './tables.css';
 
-export const StandardTable = (props) => {
+export const TeamsTable = (props) => {
 
     function showTable() {
         const hasRequiredData = props.tableData &&

@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as leaguesActions from '../../actions/leagues-actions';
+import * as agegroupsActions from '../../actions/agegroups-actions';
+import * as loaderActions from '../../actions/loader-actions';
 import { StandardTable } from '../../components/tables/standard-table';
 import StandardEntityForm from '../../components/forms/standard-entity';
 import StandardDeleteForm from '../../components/forms/standard-delete';
 import Footer from '../../components/common/footer/footer';
 import Helpers from '../../services/helpers';
-import LeagueModel from '../../models/league';
+import AgeGroupModel from '../../models/agegroup';
 import { CONFIG } from '../../config-constants';
 import './page-settings.css';
 
-class PageSettingsLeagues extends Component {
-    constructor(props) {
-        super(props);
-    }
-
+class PageSettingsAgeGroups extends Component {
     componentDidMount() {
-        this.props.actions.leagues.fetch();
+        this.props.actions.agegroups.fetch();
     }
 
     get isTablePage() {
@@ -30,7 +27,7 @@ class PageSettingsLeagues extends Component {
 
     get fields() {
         return [
-            'abbreviation', 'fullname', 'description'
+            'abbreviation', 'description'
         ];
     }
 
@@ -39,25 +36,21 @@ class PageSettingsLeagues extends Component {
             formGroups: [{
                 name: 'abbreviation',
                 label: 'Abbreviation',
-                placeholder: 'league name abbreviation',
+                placeholder: 'age group abbreviation',
                 maxLength: 5
-            }, {
-                name: 'fullname',
-                label: 'Full name',
-                placeholder: 'full name of the league'
             }, {
                 name: 'description',
                 label: 'Description',
-                placeholder: 'a few words of league description...'
+                placeholder: 'age group description...'
             }]
         }];
     }
 
     get bottomLinks() {
         return [{
-            href: '/settings/leagues',
+            href: '/settings/agegroups',
             class: 'btn btn-primary',
-            label: 'List of leagues'
+            label: 'List of age groups'
         }, {
             class: 'btn btn-secondary',
             href: '/settings',
@@ -66,18 +59,18 @@ class PageSettingsLeagues extends Component {
     }
 
     get tableData() {
-        const leagues = this.props.leagues;
+        const agegroups = this.props.agegroups;
 
-        if (!leagues || !!!leagues.length) {
+        if (!agegroups || !!!agegroups.length) {
             return [];
         }
 
         const tableData = {
-            header: ['Abbreviation', 'Full name', 'Description', 'Actions'],
-            items: leagues.map(league => {
-                return new LeagueModel(league);
+            header: ['Abbreviation', 'Description', 'Actions'],
+            items: agegroups.map(agegroup => {
+                return new AgeGroupModel(agegroup);
             }).sort((a, b) => {
-                return Helpers.sortAscending('fullname')(a, b);
+                return Helpers.sortAscending('abbreviation')(a, b);
             })
         };
 
@@ -85,34 +78,34 @@ class PageSettingsLeagues extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_LEAGUES;
+        return CONFIG.MESSAGE.INFO.NO_AGEGROUPS;
     }
 
     get tableLinks() {
         return [{
             label: 'Add new',
             class: 'btn-primary',
-            href: '/settings/leagues/add'
+            href: '/settings/agegroups/add'
         }];
     }
 
     extractSummary(id) {
-        if (!!!this.props.leagues.length) {
+        if (!!!this.props.agegroups.length) {
             return '';
         }
 
-        const league = this.props.leagues.find(item => item._id === id);
+        const agegroup = this.props.agegroups.find(item => item._id === id);
 
-        return league ? league.abbreviation : '';
+        return agegroup ? agegroup.abbreviation : '';
     }
 
     render() {
         return (
-            <div className="page page-settings page-settings-leagues">
+            <div className="page page-settings page-settings-agegroups">
                 <StandardTable
-                    group="leagues"
-                    title="Leagues"
-                    tableClass="table-leagues"
+                    group="agegroups"
+                    title="Age Groups"
+                    tableClass="table-agegroups"
                     message={this.tableMessage}
                     tableData={this.tableData}
                     tableLinks={this.tableLinks}
@@ -120,16 +113,16 @@ class PageSettingsLeagues extends Component {
                     loader={this.props.loader}
                 />
                 <StandardEntityForm
-                    group="leagues"
-                    item="league"
-                    title="new league"
+                    group="agegroups"
+                    item="agegroup"
+                    title="new age group"
                     fields={this.fields}
                     fieldsets={this.fieldsets}
                     bottomLinks={this.bottomLinks}
                 />
                 <StandardDeleteForm
-                    deleteGroup="leagues"
-                    deleteSubject={`League ${this.extractSummary(this.props.params.id)}`}
+                    deleteGroup="agegroups"
+                    deleteSubject={`AgeGroup ${this.extractSummary(this.props.params.id)}`}
                     generalMessage={CONFIG.MESSAGE.INFO.ABOUT_TO_DELETE}
                     bottomLinks={this.bottomLinks}
                 />
@@ -141,7 +134,7 @@ class PageSettingsLeagues extends Component {
 
 function mapStateToProps(state) {
     return {
-        leagues: state.leagues,
+        agegroups: state.agegroups,
         loader: state.loader
     };
 }
@@ -149,9 +142,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            leagues: bindActionCreators(leaguesActions, dispatch)
+            agegroups: bindActionCreators(agegroupsActions, dispatch),
+            loader: bindActionCreators(loaderActions, dispatch)
         }
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsLeagues);
+export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsAgeGroups);

@@ -2,7 +2,6 @@ import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter, Link } from 'react-router';
-import * as accountActions from '../../actions/account-actions';
 import * as accountsActions from '../../actions/accounts-actions';
 import * as toastActions from '../../actions/toast-actions';
 import { CONFIG } from '../../config-constants';
@@ -50,6 +49,10 @@ class AccountForm extends Component {
     }
 
     isCurrentAccount() {
+        if (!this.props.account) {
+            return false;
+        }
+
         return this.props.account._id === this.props.params.id;
     }
 
@@ -75,11 +78,11 @@ class AccountForm extends Component {
         }
 
         this.props.actions.toast.hide();
-        this.props.actions.account.edit(this.props.params.id, { firstname, surname, username, phone }, this.props.account._id);
+        this.props.actions.accounts.edit(this.props.params.id, { firstname, surname, username, phone }, this.props.account._id);
     }
 
     logout() {
-        this.props.actions.account.logout();
+        this.props.actions.accounts.logout();
     }
 
     resetPassword() {
@@ -91,6 +94,7 @@ class AccountForm extends Component {
             <div className="standard-form account-form">
                 {this.defaultValues &&
                     <div className="standard-form-fields">
+                        {this.props.title && <h3>{this.props.title}</h3>}
                         <div className="card mb-3">
                             <div className="card-header">Update details</div>
                             <div className="card-body">
@@ -161,6 +165,7 @@ class AccountForm extends Component {
                                         <button
                                             className="btn btn-primary"
                                             onClick={() => this.update()}
+                                            disabled={this.props.loader}
                                         >
                                             Update
                                         </button>
@@ -176,7 +181,7 @@ class AccountForm extends Component {
                                     {!this.isCurrentAccount() &&
                                         <p className="standard-form-bottom">
                                             <Link
-                                                to="/managers"
+                                                to="/accounts"
                                                 className="btn btn-secondary"
                                             >
                                                 More accounts
@@ -197,7 +202,6 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: {
             accounts: bindActionCreators(accountsActions, dispatch),
-            account: bindActionCreators(accountActions, dispatch),
             toast: bindActionCreators(toastActions, dispatch)
         }
     };
@@ -206,7 +210,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
         account: state.account,
-        accounts: state.accounts
+        accounts: state.accounts,
+        loader: state.loader
     };
 }
 

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 
 import * as toastActions from '../../actions/toast-actions';
-import * as accountActions from '../../actions/account-actions';
+import * as accountsActions from '../../actions/accounts-actions';
 
 import { CONFIG } from '../../config-constants';
 import Cookies from '../../services/cookies';
@@ -35,7 +35,7 @@ class PageLogin extends Component {
             return;
         }
 
-        this.props.actions.account.login(username, password);
+        this.props.actions.accounts.login(username, password);
     }
 
     register(event) {
@@ -84,6 +84,7 @@ class PageLogin extends Component {
                                                 <button
                                                     className="btn btn-primary"
                                                     onClick={() => this.logIn()}
+                                                    disabled={this.props.loader}
                                                 >
                                                     Log in
                                                 </button>
@@ -106,15 +107,19 @@ class PageLogin extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        loader: state.laoder
+    };
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            account: bindActionCreators(accountActions, dispatch),
+            accounts: bindActionCreators(accountsActions, dispatch),
             toast: bindActionCreators(toastActions, dispatch)
         }
     };
 }
 
-export default connect(() => {
-    return {};
-}, mapDispatchToProps)(PageLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(PageLogin);

@@ -1,17 +1,21 @@
 import { combineReducers } from 'redux';
 import account from './account';
 import accounts from './accounts';
-import categories from './categories';
+import agegroups from './agegroups';
+import leagues from './leagues';
 import loader from './loader';
 import menu from './menu';
+import teams from './teams';
 import toast from './toast';
 
 const rootReducer = combineReducers({
     account,
     accounts,
-    categories,
+    agegroups,
+    leagues,
     loader,
     menu,
+    teams,
     toast
 });
 

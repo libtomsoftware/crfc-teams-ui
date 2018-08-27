@@ -9,7 +9,6 @@ import Navbar from '../components/common/navbar/navbar';
 import Footer from '../components/common/footer/footer';
 
 import './layout.css';
-import './layout-standard-form.css';
 
 class Layout extends Component {
     componentDidMount() {

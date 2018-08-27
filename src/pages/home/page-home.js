@@ -6,7 +6,7 @@ import './page-home.css';
 
 class PageHome extends Component {
     componentDidMount() {
-        if (!this.props.accounts.length) {
+        if (!!!this.props.accounts.length) {
             this.props.actions.accounts.fetch();
         }
     }

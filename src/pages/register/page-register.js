@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { browserHistory } from 'react-router';
 
 import * as toastActions from '../../actions/toast-actions';
-import * as accountActions from '../../actions/account-actions';
+import * as accountsActions from '../../actions/accounts-actions';
 import { CONFIG } from '../../config-constants';
 import Helpers from '../../services/helpers';
 
@@ -107,7 +107,7 @@ class PageRegister extends Component {
             return;
         }
 
-        this.props.actions.account.register({ firstname, surname, phone, username, password }, this.clearFields);
+        this.props.actions.accounts.register({ firstname, surname, phone, username, password }, this.clearFields);
     }
 
     handleInputChange() {
@@ -241,7 +241,7 @@ class PageRegister extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            account: bindActionCreators(accountActions, dispatch),
+            accounts: bindActionCreators(accountsActions, dispatch),
             toast: bindActionCreators(toastActions, dispatch)
         }
     };

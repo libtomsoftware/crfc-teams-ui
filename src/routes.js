@@ -8,10 +8,11 @@ import PageHome from './pages/home/page-home';
 import PageLogin from './pages/login/page-login';
 import PageRegister from './pages/register/page-register';
 import PageSettings from './pages/settings/page-settings';
-import PageSettingsClubCategories from './pages/settings/page-settings-club-categories';
+import PageSettingsClubAgeGroups from './pages/settings/page-settings-club-agegroups';
 import PageSettingsClubLeagues from './pages/settings/page-settings-club-leagues';
-import PageManagers from './pages/managers/page-managers';
+import PageAccounts from './pages/accounts/page-accounts';
 import PageAccount from './pages/account/page-account';
+import PageTeams from './pages/teams/page-teams';
 
 function onRouteChange(previous, next) {
     window.scrollTo(0, 0);
@@ -30,12 +31,24 @@ export default (
         <Route path="login" component={PageLogin} />
         <Route path="register" component={PageRegister} />
         <Route path="settings" component={PageSettings} />
-        <Route path="settings/categories" component={PageSettingsClubCategories} />
-        <Route path="settings/categories/:type" component={PageSettingsClubCategories} />
-        <Route path="settings/categories/:type/:id" component={PageSettingsClubCategories} />
+
+        <Route path="settings/agegroups" component={PageSettingsClubAgeGroups} />
+        <Route path="settings/agegroups/:type" component={PageSettingsClubAgeGroups} />
+        <Route path="settings/agegroups/:type/:id" component={PageSettingsClubAgeGroups} />
+
         <Route path="settings/leagues" component={PageSettingsClubLeagues} />
+        <Route path="settings/leagues/:type" component={PageSettingsClubLeagues} />
+        <Route path="settings/leagues/:type/:id" component={PageSettingsClubLeagues} />
+
+        <Route path="accounts" component={PageAccounts} />
+        <Route path="accounts/:type" component={PageAccounts} />
+        <Route path="accounts/:type/:id" component={PageAccounts} />
+
+        <Route path="teams" component={PageTeams} />
+        <Route path="teams/:type" component={PageTeams} />
+        <Route path="teams/:type/:id" component={PageTeams} />
+
         <Route path="account/:type/:id" component={PageAccount} />
-        <Route path="managers" component={PageManagers} />
         <Redirect from="*" to="home" />
     </Route>
 );

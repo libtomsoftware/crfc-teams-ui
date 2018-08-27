@@ -2,12 +2,18 @@ import Cookies from './cookies';
 import { CONFIG } from '../config-constants';
 
 class Helpers {
+    capitalize(string) {
+        return string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
+    }
+
     shouldRedirectToLogin(path) {
         const isLoggedIn = Cookies.read('footy-token');
-        const isPathLogin = path === '/login';
-        const isPathRegister = path === '/register';
+        const isPublicPath = [
+            '/login',
+            '/register'
+        ].find(publicPath => publicPath === path);
 
-        if (isLoggedIn || isPathLogin || isPathRegister) {
+        if (isLoggedIn || isPublicPath) {
             return false;
         }
 
@@ -56,6 +62,13 @@ class Helpers {
 
     sortAscending(param) {
         return (a, b) => {
+            const aParam = a[param];
+            const bParam = b[param];
+
+            if (!aParam || !bParam) {
+                return 0;
+            }
+
             const aNum = parseInt(a[param].replace( /^\D+/g, ''), 10);
             const bNum = parseInt(b[param].replace( /^\D+/g, ''), 10);
 
