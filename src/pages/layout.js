@@ -5,7 +5,7 @@ import Helpers from '../services/helpers';
 
 import Loader from '../components/common/loader/loader';
 import Toast from '../components/common/toast/toast';
-import Navbar from '../components/common/navbar/navbar';
+import Nav from '../components/common/nav';
 import Footer from '../components/common/footer/footer';
 
 import './layout.css';
@@ -23,7 +23,7 @@ class Layout extends Component {
                 <Loader />
                 <Toast />
 
-                <Navbar />
+                <Nav />
                 {this.props.children}
                 <Footer />
             </div>

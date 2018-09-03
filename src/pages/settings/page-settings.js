@@ -36,6 +36,12 @@ class PageSettings extends Component {
                     >
                         Leagues
                     </Link>
+                    <Link
+                        className="list-group-item list-group-item-action"
+                        to={'/settings/opponents'}
+                    >
+                        Opponents
+                    </Link>
                 </div>
                 <Footer />
             </div>

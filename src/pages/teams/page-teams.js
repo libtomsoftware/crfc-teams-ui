@@ -62,7 +62,7 @@ class PageTeams extends Component {
 
     get fields() {
         return [
-            'agegroup', 'name', 'league', 'manager', 'link'
+            'agegroup', 'name', 'league', 'manager', 'manager2', 'link'
         ];
     }
 
@@ -84,7 +84,7 @@ class PageTeams extends Component {
             return [];
         }
 
-        return this.props.accounts.map(account => {
+        const managers = this.props.accounts.map(account => {
             return {
                 value: account._id,
                 label: `${account.firstname} ${account.surname}`
@@ -92,6 +92,13 @@ class PageTeams extends Component {
         }).sort((a, b) => {
             return Helpers.sortAscending('label')(a, b);
         });
+
+        managers.unshift({
+            value: null,
+            label: 'none'
+        });
+
+        return managers;
     }
 
     get leaguesDropdownOptions() {
@@ -130,6 +137,11 @@ class PageTeams extends Component {
                 type: 'dropdown',
                 options: this.managersDropdownOptions
             }, {
+                name: 'manager2',
+                label: 'Manager\'s support',
+                type: 'dropdown',
+                options: this.managersDropdownOptions
+            }, {
                 name: 'link',
                 label: 'Link',
                 placeholder: 'Link to team\'s website',
@@ -154,7 +166,7 @@ class PageTeams extends Component {
         }
 
         const tableData = {
-            header: ['Age Group', 'Name', 'League', 'Manager', 'Link', 'Actions'],
+            header: ['Age Group', 'Name', 'League', 'Manager(s)', 'Link', 'Actions'],
             items: teams.map(team => {
                 return new TeamModel(team, this.props.accounts, this.props.agegroups, this.props.leagues);
             }).sort((a, b) => {

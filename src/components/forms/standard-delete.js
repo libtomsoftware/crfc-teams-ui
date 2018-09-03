@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CONFIG } from '../../config-constants';
 import Helpers from '../../services/helpers';
-import * as toastActions from '../../actions/toast-actions';
+
 import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
+import * as leaguesActions from '../../actions/leagues-actions';
+import * as opponentsActions from '../../actions/opponents-actions';
+import * as teamsActions from '../../actions/teams-actions';
+import * as toastActions from '../../actions/toast-actions';
+
 import './forms.css';
 
 class StandardDeleteForm extends Component {
@@ -113,6 +118,9 @@ function mapDispatchToProps(dispatch) {
         actions: {
             accounts: bindActionCreators(accountsActions, dispatch),
             agegroups: bindActionCreators(agegroupsActions, dispatch),
+            leagues: bindActionCreators(leaguesActions, dispatch),
+            opponents: bindActionCreators(opponentsActions, dispatch),
+            teams: bindActionCreators(teamsActions, dispatch),
             toast: bindActionCreators(toastActions, dispatch)
         }
     };

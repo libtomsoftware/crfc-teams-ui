@@ -5,6 +5,8 @@ import agegroups from './agegroups';
 import leagues from './leagues';
 import loader from './loader';
 import menu from './menu';
+import nav from './nav';
+import opponents from './opponents';
 import teams from './teams';
 import toast from './toast';
 
@@ -15,6 +17,8 @@ const rootReducer = combineReducers({
     leagues,
     loader,
     menu,
+    nav,
+    opponents,
     teams,
     toast
 });

@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as accountsActions from '../../actions/accounts-actions';
+import * as opponentsActions from '../../actions/opponents-actions';
 import { StandardTable } from '../../components/tables/standard-table';
 import StandardEntityForm from '../../components/forms/standard-entity';
 import StandardDeleteForm from '../../components/forms/standard-delete';
 import Footer from '../../components/common/footer/footer';
 import Helpers from '../../services/helpers';
-import AccountModel from '../../models/account';
+import OpponentModel from '../../models/opponent';
 import { CONFIG } from '../../config-constants';
+import './page-settings.css';
 
-class PageAccounts extends Component {
+class PageSettingsOpponents extends Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        this.props.actions.accounts.fetch();
+        this.props.actions.opponents.fetch();
     }
 
     get isTablePage() {
@@ -29,53 +30,49 @@ class PageAccounts extends Component {
 
     get fields() {
         return [
-            'firstname', 'surname', 'username', 'phone'
+            'name', 'description'
         ];
     }
 
     get fieldsets() {
         return [{
             formGroups: [{
-                name: 'firstname',
-                label: 'First name',
-                placeholder: 'first name'
+                name: 'name',
+                label: 'Team name',
+                placeholder: 'name of the team'
             }, {
-                name: 'surname',
-                label: 'Surname',
-                placeholder: 'surname'
-            }, {
-                name: 'username',
-                label: 'Email / username',
-                placeholder: 'address email'
-            }, {
-                name: 'phone',
-                label: 'Phone',
-                placeholder: 'phone number'
+                name: 'description',
+                label: 'Additional description',
+                placeholder: 'additional team description, (e.g. Clarets, Blues)'
             }]
         }];
     }
 
     get bottomLinks() {
         return [{
-            href: '/accounts',
+            href: '/settings/opponents',
             class: 'btn btn-primary',
-            label: 'List of accounts'
+            label: 'List of opponent teams'
+        }, {
+            class: 'btn btn-secondary',
+            href: '/settings',
+            label: 'More settings'
         }];
     }
 
     get tableData() {
-        const accounts = this.props.accounts;
+        const opponents = this.props.opponents;
 
-        if (!accounts || !!!accounts.length) {
+        if (!opponents || !!!opponents.length) {
             return [];
         }
 
         const tableData = {
-            header: ['First name', 'Surname', 'Email', 'Phone', 'Actions'],
-            items: accounts.map(account => {
-                return new AccountModel(account);
+            header: ['Name', 'Description', 'Actions'],
+            items: opponents.map(opponent => {
+                return new OpponentModel(opponent);
             }).sort((a, b) => {
-                return Helpers.sortAscending('surname')(a, b);
+                return Helpers.sortAscending('name')(a, b);
             })
         };
 
@@ -83,34 +80,34 @@ class PageAccounts extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_MANAGERS;
+        return CONFIG.MESSAGE.INFO.NO_OPPONENTS;
     }
 
     get tableLinks() {
         return [{
             label: 'Add new',
             class: 'btn-primary',
-            href: '/register'
+            href: '/settings/opponents/add'
         }];
     }
 
     extractSummary(id) {
-        if (!!!this.props.accounts.length) {
+        if (!!!this.props.opponents.length) {
             return '';
         }
 
-        const account = this.props.accounts.find(item => item._id === id);
+        const opponent = this.props.opponents.find(item => item._id === id);
 
-        return account ? `${account.firstname} ${account.surname}` : '';
+        return opponent ? opponent.abbreviation : '';
     }
 
     render() {
         return (
-            <div className="page page-accounts">
+            <div className="page page-settings page-settings-opponents">
                 <StandardTable
-                    group="accounts"
-                    title="Club Managers"
-                    tableClass="table-accounts"
+                    group="opponents"
+                    title="Opponent teams"
+                    tableClass="table-opponents"
                     message={this.tableMessage}
                     tableData={this.tableData}
                     tableLinks={this.tableLinks}
@@ -118,16 +115,16 @@ class PageAccounts extends Component {
                     loader={this.props.loader}
                 />
                 <StandardEntityForm
-                    group="accounts"
-                    item="account"
-                    title="new manager"
+                    group="opponents"
+                    item="opponent"
+                    title="new opponent team"
                     fields={this.fields}
                     fieldsets={this.fieldsets}
                     bottomLinks={this.bottomLinks}
                 />
                 <StandardDeleteForm
-                    deleteGroup="accounts"
-                    deleteSubject={`Account ${this.extractSummary(this.props.params.id)}`}
+                    deleteGroup="opponents"
+                    deleteSubject={`Opponent team ${this.extractSummary(this.props.params.id)}`}
                     generalMessage={CONFIG.MESSAGE.INFO.ABOUT_TO_DELETE}
                     bottomLinks={this.bottomLinks}
                 />
@@ -139,7 +136,7 @@ class PageAccounts extends Component {
 
 function mapStateToProps(state) {
     return {
-        accounts: state.accounts,
+        opponents: state.opponents,
         loader: state.loader
     };
 }
@@ -147,9 +144,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            accounts: bindActionCreators(accountsActions, dispatch)
+            opponents: bindActionCreators(opponentsActions, dispatch)
         }
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageAccounts);
+export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsOpponents);

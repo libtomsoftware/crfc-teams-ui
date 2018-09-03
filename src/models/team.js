@@ -26,14 +26,21 @@ function getLeague(value, leagues) {
     return leagues.find(group => group._id === value).abbreviation;
 }
 
-function getManager(value, accounts) {
+function getManagers(values, accounts) {
     if (!accounts || !!!accounts.length) {
         return '';
     }
 
-    const manager = accounts.find(group => group._id === value);
+    const manager = accounts.find(group => group._id === values[0]);
+    const manager2 = accounts.find(group => group._id === values[1]);
 
-    return `${manager.firstname} ${manager.surname}`;
+    let result = manager ? `${manager.firstname} ${manager.surname}` : '';
+
+    if (manager2) {
+        result += `, ${manager2.firstname} ${manager2.surname}`;
+    }
+
+    return result;
 }
 
 function getLink(value) {
@@ -63,7 +70,8 @@ export default class TeamModel {
         this.agegroup = getAgeGroup(data.agegroup, agegroups);
         this.name = data.name;
         this.league = getLeague(data.league, leagues);
-        this.manager = getManager(data.manager, accounts);
+        this.managers = getManagers([data.manager, data.manager2], accounts);
+
         this.link = getLink(data.link);
         this.actions = data.actions || this.getStandardActions(data._id);
 

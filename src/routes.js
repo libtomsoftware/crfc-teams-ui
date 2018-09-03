@@ -10,6 +10,7 @@ import PageRegister from './pages/register/page-register';
 import PageSettings from './pages/settings/page-settings';
 import PageSettingsClubAgeGroups from './pages/settings/page-settings-club-agegroups';
 import PageSettingsClubLeagues from './pages/settings/page-settings-club-leagues';
+import PageSettingsClubOpponents from './pages/settings/page-settings-club-opponents';
 import PageAccounts from './pages/accounts/page-accounts';
 import PageAccount from './pages/account/page-account';
 import PageTeams from './pages/teams/page-teams';
@@ -39,6 +40,10 @@ export default (
         <Route path="settings/leagues" component={PageSettingsClubLeagues} />
         <Route path="settings/leagues/:type" component={PageSettingsClubLeagues} />
         <Route path="settings/leagues/:type/:id" component={PageSettingsClubLeagues} />
+
+        <Route path="settings/opponents" component={PageSettingsClubOpponents} />
+        <Route path="settings/opponents/:type" component={PageSettingsClubOpponents} />
+        <Route path="settings/opponents/:type/:id" component={PageSettingsClubOpponents} />
 
         <Route path="accounts" component={PageAccounts} />
         <Route path="accounts/:type" component={PageAccounts} />

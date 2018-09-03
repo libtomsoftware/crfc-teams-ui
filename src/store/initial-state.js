@@ -5,6 +5,8 @@ export default {
     leagues: [],
     loader: false,
     menu: false,
+    nav: false,
+    opponents: [],
     teams: [],
     toast: null
 };

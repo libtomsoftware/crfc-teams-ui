@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { CONFIG } from '../../config-constants';
 import Helpers from '../../services/helpers';
-import * as toastActions from '../../actions/toast-actions';
+
+import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
-import * as accountsActions from '../../actions/accounts-actions';
+import * as opponentsActions from '../../actions/opponents-actions';
 import * as teamsActions from '../../actions/teams-actions';
+import * as toastActions from '../../actions/toast-actions';
 
 class StandardEntityForm extends Component {
     constructor(props) {
@@ -206,9 +208,11 @@ class StandardEntityForm extends Component {
 
 function mapStateToProps(state) {
     return {
+        accounts: state.accounts,
         agegroups: state.agegroups,
         leagues: state.leagues,
         loader: state.loader,
+        opponents: state.opponents,
         teams: state.teams
     };
 }
@@ -219,6 +223,7 @@ function mapDispatchToProps(dispatch) {
             accounts: bindActionCreators(accountsActions, dispatch),
             agegroups: bindActionCreators(agegroupsActions, dispatch),
             leagues: bindActionCreators(leaguesActions, dispatch),
+            opponents: bindActionCreators(opponentsActions, dispatch),
             teams: bindActionCreators(teamsActions, dispatch),
             toast: bindActionCreators(toastActions, dispatch)
         }
