@@ -70,7 +70,7 @@ export const StandardTable = (props) => {
                                                     } else if (field === 'actions') {
                                                         cell = <td className="table-item-actions" key={z}>{item.actions.map((action, y) => action.link(y))}</td>;
                                                     } else {
-                                                        cell = <td key={z}>{item[field]}</td>;
+                                                        cell = <td key={z}>{item[field] || '-'}</td>;
                                                     }
 
                                                     return cell;

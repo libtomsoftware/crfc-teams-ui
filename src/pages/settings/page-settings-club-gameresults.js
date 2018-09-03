@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as agegroupsActions from '../../actions/agegroups-actions';
-import * as loaderActions from '../../actions/loader-actions';
+import * as gameresultsActions from '../../actions/gameresults-actions';
 import { StandardTable } from '../../components/tables/standard-table';
 import StandardEntityForm from '../../components/forms/standard-entity';
 import StandardDeleteForm from '../../components/forms/standard-delete';
 import Footer from '../../components/common/footer/footer';
 import Helpers from '../../services/helpers';
-import AgeGroupModel from '../../models/agegroup';
+import GameResultModel from '../../models/game-result';
 import { CONFIG } from '../../config-constants';
 import './page-settings.css';
 
-class PageSettingsAgeGroups extends Component {
+class PageSettingsGameResults extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
-        this.props.actions.agegroups.fetch();
+        this.props.actions.gameresults.fetch();
     }
 
     get isTablePage() {
@@ -27,31 +30,26 @@ class PageSettingsAgeGroups extends Component {
 
     get fields() {
         return [
-            'abbreviation', 'description'
+            'name'
         ];
     }
 
     get fieldsets() {
         return [{
             formGroups: [{
-                name: 'abbreviation',
-                label: 'Abbreviation',
-                placeholder: 'age group abbreviation',
-                maxLength: 5,
+                name: 'name',
+                label: 'Type',
+                placeholder: 'type of the game result',
                 isMandatory: true
-            }, {
-                name: 'description',
-                label: 'Description',
-                placeholder: 'age group description...'
             }]
         }];
     }
 
     get bottomLinks() {
         return [{
-            href: '/settings/agegroups',
+            href: '/settings/gameresults',
             class: 'btn btn-primary',
-            label: 'List of age groups'
+            label: 'List of game result types'
         }, {
             class: 'btn btn-secondary',
             href: '/settings',
@@ -60,18 +58,18 @@ class PageSettingsAgeGroups extends Component {
     }
 
     get tableData() {
-        const agegroups = this.props.agegroups;
+        const gameresults = this.props.gameresults;
 
-        if (!agegroups || !!!agegroups.length) {
+        if (!gameresults || !!!gameresults.length) {
             return [];
         }
 
         const tableData = {
-            header: ['Abbreviation', 'Description', 'Actions'],
-            items: agegroups.map(agegroup => {
-                return new AgeGroupModel(agegroup);
+            header: ['Type', 'Actions'],
+            items: gameresults.map(gameresult => {
+                return new GameResultModel(gameresult);
             }).sort((a, b) => {
-                return Helpers.sortAscending('abbreviation')(a, b);
+                return Helpers.sortAscending('name')(a, b);
             })
         };
 
@@ -79,34 +77,34 @@ class PageSettingsAgeGroups extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_AGEGROUPS;
+        return CONFIG.MESSAGE.INFO.NO_GAMERESULTS;
     }
 
     get tableLinks() {
         return [{
             label: 'Add new',
             class: 'btn-primary',
-            href: '/settings/agegroups/add'
+            href: '/settings/gameresults/add'
         }];
     }
 
     extractSummary(id) {
-        if (!!!this.props.agegroups.length) {
+        if (!!!this.props.gameresults.length) {
             return '';
         }
 
-        const agegroup = this.props.agegroups.find(item => item._id === id);
+        const gameresult = this.props.gameresults.find(item => item._id === id);
 
-        return agegroup ? agegroup.abbreviation : '';
+        return gameresult ? gameresult.abbreviation : '';
     }
 
     render() {
         return (
-            <div className="page page-settings page-settings-agegroups">
+            <div className="page page-settings page-settings-gameresults">
                 <StandardTable
-                    group="agegroups"
-                    title="Age Groups"
-                    tableClass="table-agegroups"
+                    group="gameresults"
+                    title="Game Result Types"
+                    tableClass="table-gameresults"
                     message={this.tableMessage}
                     tableData={this.tableData}
                     tableLinks={this.tableLinks}
@@ -114,17 +112,17 @@ class PageSettingsAgeGroups extends Component {
                     loader={this.props.loader}
                 />
                 <StandardEntityForm
-                    group="agegroups"
+                    group="gameresults"
                     groupPrefix="settings"
-                    item="agegroup"
-                    title="new age group"
+                    item="gameresult"
+                    title="new type"
                     fields={this.fields}
                     fieldsets={this.fieldsets}
                     bottomLinks={this.bottomLinks}
                 />
                 <StandardDeleteForm
-                    deleteGroup="agegroups"
-                    deleteSubject={`AgeGroup ${this.extractSummary(this.props.params.id)}`}
+                    deleteGroup="gameresults"
+                    deleteSubject={`Game result type ${this.extractSummary(this.props.params.id)}`}
                     generalMessage={CONFIG.MESSAGE.INFO.ABOUT_TO_DELETE}
                     bottomLinks={this.bottomLinks}
                 />
@@ -136,7 +134,7 @@ class PageSettingsAgeGroups extends Component {
 
 function mapStateToProps(state) {
     return {
-        agegroups: state.agegroups,
+        gameresults: state.gameresults,
         loader: state.loader
     };
 }
@@ -144,10 +142,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            agegroups: bindActionCreators(agegroupsActions, dispatch),
-            loader: bindActionCreators(loaderActions, dispatch)
+            gameresults: bindActionCreators(gameresultsActions, dispatch)
         }
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsAgeGroups);
+export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsGameResults);

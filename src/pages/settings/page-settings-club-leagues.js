@@ -40,11 +40,13 @@ class PageSettingsLeagues extends Component {
                 name: 'abbreviation',
                 label: 'Abbreviation',
                 placeholder: 'league name abbreviation',
-                maxLength: 5
+                maxLength: 5,
+                isMandatory: true
             }, {
                 name: 'fullname',
                 label: 'Full name',
-                placeholder: 'full name of the league'
+                placeholder: 'full name of the league',
+                isMandatory: true
             }, {
                 name: 'description',
                 label: 'Description',
@@ -121,6 +123,7 @@ class PageSettingsLeagues extends Component {
                 />
                 <StandardEntityForm
                     group="leagues"
+                    groupPrefix="settings"
                     item="league"
                     title="new league"
                     fields={this.fields}

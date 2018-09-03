@@ -20,6 +20,7 @@ class PageSettings extends Component {
     render() {
         return (
             <div className="page page-settings">
+
                 <div className="list-group">
                     <div className="list-group-item active">
                         Club settings
@@ -30,6 +31,12 @@ class PageSettings extends Component {
                     >
                         Age Groups
                     </Link>
+                </div>
+
+                <div className="list-group">
+                    <div className="list-group-item active">
+                        Competition settings
+                    </div>
                     <Link
                         className="list-group-item list-group-item-action"
                         to={'/settings/leagues'}
@@ -41,6 +48,18 @@ class PageSettings extends Component {
                         to={'/settings/opponents'}
                     >
                         Opponents
+                    </Link>
+                </div>
+
+                <div className="list-group">
+                    <div className="list-group-item active">
+                        Fixtures settings
+                    </div>
+                    <Link
+                        className="list-group-item list-group-item-action"
+                        to={'/settings/gameresults'}
+                    >
+                        Game result types
                     </Link>
                 </div>
                 <Footer />

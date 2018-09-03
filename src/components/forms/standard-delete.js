@@ -7,6 +7,7 @@ import Helpers from '../../services/helpers';
 
 import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
+import * as gameresultsActions from '../../actions/gameresults-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
 import * as opponentsActions from '../../actions/opponents-actions';
 import * as teamsActions from '../../actions/teams-actions';
@@ -118,6 +119,7 @@ function mapDispatchToProps(dispatch) {
         actions: {
             accounts: bindActionCreators(accountsActions, dispatch),
             agegroups: bindActionCreators(agegroupsActions, dispatch),
+            gameresults: bindActionCreators(gameresultsActions, dispatch),
             leagues: bindActionCreators(leaguesActions, dispatch),
             opponents: bindActionCreators(opponentsActions, dispatch),
             teams: bindActionCreators(teamsActions, dispatch),

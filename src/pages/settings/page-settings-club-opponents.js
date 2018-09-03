@@ -39,7 +39,8 @@ class PageSettingsOpponents extends Component {
             formGroups: [{
                 name: 'name',
                 label: 'Team name',
-                placeholder: 'name of the team'
+                placeholder: 'name of the team',
+                isMandatory: true
             }, {
                 name: 'description',
                 label: 'Additional description',
@@ -116,6 +117,7 @@ class PageSettingsOpponents extends Component {
                 />
                 <StandardEntityForm
                     group="opponents"
+                    groupPrefix="settings"
                     item="opponent"
                     title="new opponent team"
                     fields={this.fields}

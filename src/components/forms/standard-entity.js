@@ -8,6 +8,7 @@ import Helpers from '../../services/helpers';
 import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
+import * as gameresultsActions from '../../actions/gameresults-actions';
 import * as opponentsActions from '../../actions/opponents-actions';
 import * as teamsActions from '../../actions/teams-actions';
 import * as toastActions from '../../actions/toast-actions';
@@ -59,7 +60,7 @@ class StandardEntityForm extends Component {
         const values = Helpers.getFieldsValues(this.fields);
         const actions = this.props.actions[this.props.group];
 
-        if (Helpers.hasEmptyValues(values)) {
+        if (Helpers.hasEmptyMandatoryValues(this.props.fieldsets, values)) {
             this.showToast(CONFIG.MESSAGE.ERROR.EMPTY_FIELDS);
             return;
         }
@@ -71,7 +72,7 @@ class StandardEntityForm extends Component {
                 _id: this.props.params.id
             })).then(() => {
                 this.clearForm();
-                browserHistory.push('/' + [this.props.group]);
+                browserHistory.push(`/${this.props.groupPrefix ? this.props.groupPrefix + '/' : ''}${this.props.group}`);
             });
         } else {
             actions.add(values).then(this.clearForm);
@@ -160,7 +161,7 @@ class StandardEntityForm extends Component {
                                                         return (
                                                             <div className="form-group" key={b}>
                                                                 <label className="control-label" htmlFor={`${formGroup.name}`}>
-                                                                    {formGroup.label}
+                                                                    {formGroup.label}{formGroup.isMandatory ? ' * ' : ''}
                                                                 </label>
                                                                 {this.getFormControl(formGroup)}
                                                             </div>
@@ -181,6 +182,7 @@ class StandardEntityForm extends Component {
                                             {this.isUpdate() ? 'Update' : 'Add'}
                                         </button>
                                     </div>
+                                    <p className="standard-form-info">* mandatory fields</p>
                                 </div>
                                 {this.props.bottomLinks && !!this.props.bottomLinks.length &&
                                     <p className="standard-form-bottom">
@@ -210,6 +212,7 @@ function mapStateToProps(state) {
     return {
         accounts: state.accounts,
         agegroups: state.agegroups,
+        gameresults: state.gameresults,
         leagues: state.leagues,
         loader: state.loader,
         opponents: state.opponents,
@@ -222,6 +225,7 @@ function mapDispatchToProps(dispatch) {
         actions: {
             accounts: bindActionCreators(accountsActions, dispatch),
             agegroups: bindActionCreators(agegroupsActions, dispatch),
+            gameresults: bindActionCreators(gameresultsActions, dispatch),
             leagues: bindActionCreators(leaguesActions, dispatch),
             opponents: bindActionCreators(opponentsActions, dispatch),
             teams: bindActionCreators(teamsActions, dispatch),

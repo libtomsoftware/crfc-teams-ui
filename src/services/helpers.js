@@ -32,6 +32,28 @@ class Helpers {
         return hasEmpty;
     }
 
+    hasEmptyMandatoryValues(fieldsets, values) {
+        let result = false;
+
+        fieldsets.forEach(fieldset => {
+            if (fieldset.formGroups) {
+                const mandatoryFields = fieldset.formGroups.filter(formGroup => formGroup.isMandatory).map(formGroup => formGroup.name);
+
+                if (!mandatoryFields.length) {
+                    return;
+                }
+
+                mandatoryFields.forEach(field => {
+                    if (!values[field] || values[field] === '') {
+                        result = true;
+                    }
+                });
+            }
+        });
+
+        return result;
+    }
+
     getFieldsValues(fields) {
         const values = {};
 

@@ -2,6 +2,7 @@ export default {
     account: null,
     accounts: [],
     agegroups: [],
+    gameresults: [],
     leagues: [],
     loader: false,
     menu: false,
