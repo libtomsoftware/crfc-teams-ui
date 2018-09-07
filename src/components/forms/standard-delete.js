@@ -25,21 +25,32 @@ class StandardDeleteForm extends Component {
         };
 
         this.delete = this.delete.bind(this);
+        this.handleCurrent = this.handleCurrent.bind(this);
     }
 
     componentDidMount() {
         const actions = this.props.actions[this.props.deleteGroup];
 
         if (actions) {
-            actions.fetch().then(items => {
-                const current = items.find(item => item._id === this.props.params.id);
+            actions.fetch().then(this.handleCurrent);
+        }
+    }
 
-                if (current) {
-                    this.setState({
-                        disabled: false,
-                        deleted: false
-                    });
-                }
+    componentDidUpdate(prevProps) {
+        if (this.props.params.id !== prevProps.params.id) {
+            const items = this.props[this.props.deleteGroup];
+
+            this.handleCurrent(items);
+        }
+    }
+
+    handleCurrent(items) {
+        const current = items.find(item => item._id === this.props.params.id);
+
+        if (current) {
+            this.setState({
+                disabled: false,
+                deleted: false
             });
         }
     }
