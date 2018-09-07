@@ -1,6 +1,14 @@
 import axios from 'axios';
 import * as loaderActions from '../loader-actions';
+import * as toastActions from '../toast-actions';
 import { CONFIG } from '../../config-constants';
+
+function showToast(type, message, dispatch) {
+    toastActions.show({
+        message,
+        type
+    })(dispatch);
+}
 
 export async function fetch(dispatch, resource) {
     let result;
@@ -20,5 +28,20 @@ export async function fetch(dispatch, resource) {
 
     loaderActions.hide()(dispatch);
 
-    return result[resource] || result;
+    return result ? result[resource] || result : null;
+}
+
+export async function remove(dispatch, params) {
+    loaderActions.show()(dispatch);
+    try {
+        await axios.delete(`${CONFIG.URL.API}/${params.resource}/${params.id}`, {
+            withCredentials: true
+        });
+
+        showToast('success', CONFIG.MESSAGE.INFO[params.success], dispatch);
+    } catch (error) {
+        showToast('danger', CONFIG.MESSAGE.ERROR[params.error], dispatch);
+    }
+
+    loaderActions.hide()(dispatch);
 }

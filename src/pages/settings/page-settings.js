@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as accountsActions from '../../actions/accounts-actions';
@@ -68,6 +68,10 @@ class PageSettings extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return state;
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
@@ -76,6 +80,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(() => {
-    return {};
-}, mapDispatchToProps)(PageSettings);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PageSettings));

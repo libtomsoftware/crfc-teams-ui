@@ -81,17 +81,12 @@ export function edit(agegroupData) {
 
 export function remove(id) {
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            await axios.delete(`${CONFIG.URL.API}/teams/${id}`, {
-                withCredentials: true
-            });
-
-            showToast('success', CONFIG.MESSAGE.INFO.TEAM_DELETED, dispatch);
-        } catch (error) {
-            showToast('danger', CONFIG.MESSAGE.ERROR.TEAM_UPDATE, dispatch);
-        }
-        loaderActions.hide()(dispatch);
+        await async.remove(dispatch, {
+            id,
+            resource: 'teams',
+            success: 'TEAM_DELETED',
+            error: 'TEAM_DELETE'
+        });
         return fetch()(dispatch);
     };
 }

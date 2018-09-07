@@ -83,17 +83,12 @@ export function edit(leagueData) {
 
 export function remove(id) {
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            await axios.delete(`${CONFIG.URL.API}/leagues/${id}`, {
-                withCredentials: true
-            });
-
-            showToast('success', CONFIG.MESSAGE.INFO.LEAGUE_DELETED, dispatch);
-        } catch (error) {
-            showToast('danger', CONFIG.MESSAGE.ERROR.LEAGUE_DELETE, dispatch);
-        }
-        loaderActions.hide()(dispatch);
+        await async.remove(dispatch, {
+            id,
+            resource: 'leagues',
+            success: 'LEAGUE_DELETED',
+            error: 'LEAGUE_DELETE'
+        });
         return fetch()(dispatch);
     };
 }

@@ -3,6 +3,7 @@ import { CONFIG } from '../config-constants';
 import * as types from './action-types';
 import * as toastActions from './toast-actions';
 import * as loaderActions from './loader-actions';
+import * as async from './common/async';
 
 function showToast(type, message, dispatch) {
     toastActions.show({
@@ -18,25 +19,17 @@ function getUpdateEvent(opponents) {
     };
 }
 
+export async function load(dispatch) {
+    return async.fetch(dispatch, 'opponents');
+}
+
 export function fetch() {
     let opponents = [];
 
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            const response = await axios.get(`${CONFIG.URL.API}/opponents`, {
-                withCredentials: true
-            });
-
-            if (response && response.data) {
-                opponents = response.data.opponents;
-            }
-        } catch (error) {
-            console.error('opponents error', error);
-        }
+        opponents = await load(dispatch);
 
         dispatch(getUpdateEvent(opponents));
-        loaderActions.hide()(dispatch);
 
         return new Promise(resolve => {
             resolve(opponents);
@@ -90,17 +83,12 @@ export function edit(opponentData) {
 
 export function remove(id) {
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            await axios.delete(`${CONFIG.URL.API}/opponents/${id}`, {
-                withCredentials: true
-            });
-
-            showToast('success', CONFIG.MESSAGE.INFO.OPPONENT_DELETED, dispatch);
-        } catch (error) {
-            showToast('danger', CONFIG.MESSAGE.ERROR.OPPONENT_DELETE, dispatch);
-        }
-        loaderActions.hide()(dispatch);
+        await async.remove(dispatch, {
+            id,
+            resource: 'opponents',
+            success: 'OPPONENT_DELETED',
+            error: 'OPPONENT_DELETE'
+        });
         return fetch()(dispatch);
     };
 }

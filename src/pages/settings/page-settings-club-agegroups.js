@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router';
 import * as agegroupsActions from '../../actions/agegroups-actions';
 import * as loaderActions from '../../actions/loader-actions';
 import { StandardTable } from '../../components/tables/standard-table';
@@ -150,4 +151,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsAgeGroups);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PageSettingsAgeGroups));

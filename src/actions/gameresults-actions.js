@@ -3,6 +3,7 @@ import { CONFIG } from '../config-constants';
 import * as types from './action-types';
 import * as toastActions from './toast-actions';
 import * as loaderActions from './loader-actions';
+import * as async from './common/async';
 
 function showToast(type, message, dispatch) {
     toastActions.show({
@@ -18,25 +19,17 @@ function getUpdateEvent(gameresults) {
     };
 }
 
+export async function load(dispatch) {
+    return async.fetch(dispatch, 'gameresults');
+}
+
 export function fetch() {
     let gameresults = [];
 
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            const response = await axios.get(`${CONFIG.URL.API}/gameresults`, {
-                withCredentials: true
-            });
-
-            if (response && response.data) {
-                gameresults = response.data.gameresults;
-            }
-        } catch (error) {
-            console.error('gameresults error', error);
-        }
+        gameresults = await load(dispatch);
 
         dispatch(getUpdateEvent(gameresults));
-        loaderActions.hide()(dispatch);
 
         return new Promise(resolve => {
             resolve(gameresults);
@@ -90,17 +83,12 @@ export function edit(opponentData) {
 
 export function remove(id) {
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            await axios.delete(`${CONFIG.URL.API}/gameresults/${id}`, {
-                withCredentials: true
-            });
-
-            showToast('success', CONFIG.MESSAGE.INFO.GAMERESULT_DELETED, dispatch);
-        } catch (error) {
-            showToast('danger', CONFIG.MESSAGE.ERROR.GAMERESULT_DELETE, dispatch);
-        }
-        loaderActions.hide()(dispatch);
+        await async.remove(dispatch, {
+            id,
+            resource: 'gameresults',
+            success: 'GAMERESULT_DELETED',
+            error: 'GAMERESULT_DELETE'
+        });
         return fetch()(dispatch);
     };
 }

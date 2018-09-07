@@ -148,18 +148,12 @@ export function fetch() {
 
 export function remove(id) {
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            await axios.delete(`${CONFIG.URL.API}/accounts/${id}`, {
-                withCredentials: true
-            });
-
-            showToast('success', CONFIG.MESSAGE.INFO.ACCOUNT_DELETED, dispatch);
-        } catch (error) {
-            showToast('danger', CONFIG.MESSAGE.ERROR.ACCOUNT_DELETE, dispatch);
-        }
-
-        loaderActions.hide()(dispatch);
+        await async.remove(dispatch, {
+            id,
+            resource: 'accounts',
+            success: CONFIG.MESSAGE.INFO.ACCOUNT_DELETED,
+            error: CONFIG.MESSAGE.ERROR.ACCOUNT_DELETE
+        });
         return fetch()(dispatch);
     };
 }
