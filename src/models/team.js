@@ -27,17 +27,27 @@ function getLeague(value, leagues) {
 }
 
 function getManagers(values, accounts) {
+    const result = [];
+
     if (!accounts || !!!accounts.length) {
-        return '';
+        return result;
     }
 
     const manager = accounts.find(group => group._id === values[0]);
     const manager2 = accounts.find(group => group._id === values[1]);
 
-    let result = manager ? `${manager.firstname} ${manager.surname}` : '';
+    if (manager) {
+        result.push( {
+            firstname: manager.firstname,
+            surname: manager.surname
+        });
+    }
 
     if (manager2) {
-        result += `, ${manager2.firstname} ${manager2.surname}`;
+        result.push( {
+            firstname: manager2.firstname,
+            surname: manager2.surname
+        });
     }
 
     return result;

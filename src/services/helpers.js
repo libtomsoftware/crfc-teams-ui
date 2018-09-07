@@ -6,6 +6,10 @@ class Helpers {
         return string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
     }
 
+    isArray( variable ) {
+        return variable.constructor === Array;
+    }
+
     shouldRedirectToLogin(path) {
         const isLoggedIn = Cookies.read('footy-token');
         const isPublicPath = [

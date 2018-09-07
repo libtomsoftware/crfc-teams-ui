@@ -41,6 +41,13 @@ class Nav extends Component {
                 icon: 'fa-users',
                 reqLogin: true,
                 rank: 1
+            },
+            {
+                route: '/settings',
+                label: 'settings',
+                icon: 'fa-sliders-h',
+                reqLogin: true,
+                rank: 1
             }
         ];
     }
@@ -48,11 +55,13 @@ class Nav extends Component {
     get menuLinks() {
         return [
             {
-                route: '/settings',
-                label: 'settings',
-                icon: 'fa-sliders-h',
-                reqLogin: true
-            }, {
+                route: '/team',
+                label: 'team',
+                icon: 'fa-users',
+                reqLogin: true,
+                param: this.account._id
+            },
+            {
                 route: '/account/edit',
                 label: 'account',
                 icon: 'fa-id-card',

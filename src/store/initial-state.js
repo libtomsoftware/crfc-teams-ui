@@ -8,6 +8,7 @@ export default {
     menu: false,
     nav: false,
     opponents: [],
+    team: null,
     teams: [],
     toast: null
 };

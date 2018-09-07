@@ -3,6 +3,7 @@ import { CONFIG } from '../config-constants';
 import * as types from './action-types';
 import * as toastActions from './toast-actions';
 import * as loaderActions from './loader-actions';
+import * as async from './common/async';
 
 function showToast(type, message, dispatch) {
     toastActions.show({
@@ -18,25 +19,17 @@ function getUpdateEvent(agegroups) {
     };
 }
 
+export async function load(dispatch) {
+    return async.fetch(dispatch, 'agegroups');
+}
+
 export function fetch() {
     let agegroups = [];
 
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            const response = await axios.get(`${CONFIG.URL.API}/agegroups`, {
-                withCredentials: true
-            });
-
-            if (response && response.data) {
-                agegroups = response.data.agegroups;
-            }
-        } catch (error) {
-            console.error('agegroups error', error);
-        }
+        agegroups = await load(dispatch);
 
         dispatch(getUpdateEvent(agegroups));
-        loaderActions.hide()(dispatch);
 
         return new Promise(resolve => {
             resolve(agegroups);

@@ -3,6 +3,7 @@ import { CONFIG } from '../config-constants';
 import * as types from './action-types';
 import * as toastActions from './toast-actions';
 import * as loaderActions from './loader-actions';
+import * as async from './common/async';
 
 function showToast(type, message, dispatch) {
     toastActions.show({
@@ -18,25 +19,17 @@ function getUpdateEvent(teams) {
     };
 }
 
+export async function load(dispatch) {
+    return async.fetch(dispatch, 'teams');
+}
+
 export function fetch() {
     let teams = [];
 
     return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            const response = await axios.get(`${CONFIG.URL.API}/teams`, {
-                withCredentials: true
-            });
-
-            if (response && response.data) {
-                teams = response.data.teams;
-            }
-        } catch (error) {
-            console.error('teams error', error);
-        }
+        teams = await load(dispatch);
 
         dispatch(getUpdateEvent(teams));
-        loaderActions.hide()(dispatch);
 
         return new Promise(resolve => {
             resolve(teams);

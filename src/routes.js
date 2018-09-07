@@ -15,6 +15,7 @@ import PageSettingsClubGameResults from './pages/settings/page-settings-club-gam
 import PageAccounts from './pages/accounts/page-accounts';
 import PageAccount from './pages/account/page-account';
 import PageTeams from './pages/teams/page-teams';
+import PageTeam from './pages/team/page-team';
 
 function onRouteChange(previous, next) {
     window.scrollTo(0, 0);
@@ -57,6 +58,8 @@ export default (
         <Route path="teams" component={PageTeams} />
         <Route path="teams/:type" component={PageTeams} />
         <Route path="teams/:type/:id" component={PageTeams} />
+
+        <Route path="team/:managerId" component={PageTeam} />
 
         <Route path="account/:type/:id" component={PageAccount} />
         <Redirect from="*" to="home" />

@@ -4,6 +4,7 @@ import * as types from './action-types';
 import { CONFIG } from '../config-constants';
 import * as toastActions from './toast-actions';
 import * as loaderActions from './loader-actions';
+import * as async from './common/async';
 import Cookies from '../services/cookies';
 
 function showToast(type, message, dispatch) {
@@ -127,24 +128,17 @@ export function register(userData, clearFieldsCallback) {
     };
 }
 
+export async function load(dispatch) {
+    return async.fetch(dispatch, 'accounts');
+}
+
 export function fetch() {
     let accounts = [];
-    return async function (dispatch) {
-        loaderActions.show()(dispatch);
-        try {
-            const response = await axios.get(`${CONFIG.URL.API}/accounts`, {
-                withCredentials: true
-            });
 
-            if (response && response.data) {
-                accounts = response.data.accounts;
-            }
-        } catch (error) {
-            console.error('accounts error', error);
-        }
+    return async function (dispatch) {
+        accounts = await load(dispatch);
 
         dispatch(getAccountsUpdateEvent(accounts));
-        loaderActions.hide()(dispatch);
 
         return new Promise(resolve => {
             resolve(accounts);

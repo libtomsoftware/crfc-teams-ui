@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import './tables.css';
+import helpers from '../../services/helpers';
 
 export const StandardTable = (props) => {
 
@@ -65,12 +66,36 @@ export const StandardTable = (props) => {
                                                 {Object.keys(item).map((field, z) => {
                                                     let cell;
 
+                                                    function getCell(value) {
+                                                        let cellContent;
+                                                        if (helpers.isArray(value)) {
+                                                            let valueStringified = '';
+                                                            const max = value.length;
+
+                                                            value.forEach((element, index) => {
+                                                                Object.keys(element).forEach(key => {
+                                                                    valueStringified += element[key];
+                                                                });
+
+                                                                if (max > 1 && index < max - 1) {
+                                                                    valueStringified += ', ';
+                                                                }
+                                                            });
+
+                                                            cellContent = <td key={z}>{valueStringified || '-'}</td>;
+                                                        } else {
+                                                            cellContent = <td key={z}>{value || '-'}</td>;
+                                                        }
+
+                                                        return cellContent;
+                                                    }
+
                                                     if (field === '_id' || field === 'hidden') {
                                                         cell = null;
                                                     } else if (field === 'actions') {
                                                         cell = <td className="table-item-actions" key={z}>{item.actions.map((action, y) => action.link(y))}</td>;
                                                     } else {
-                                                        cell = <td key={z}>{item[field] || '-'}</td>;
+                                                        cell = getCell(item[field]);
                                                     }
 
                                                     return cell;
