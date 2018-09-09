@@ -87,7 +87,7 @@ class PageSettingsLeagues extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_LEAGUES;
+        return CONFIG.MESSAGE.INFO.NONE_SO_FAR('leagues');
     }
 
     get tableLinks() {

@@ -61,6 +61,12 @@ class PageSettings extends Component {
                     >
                         Game result types
                     </Link>
+                    <Link
+                        className="list-group-item list-group-item-action"
+                        to={'/settings/gamestates'}
+                    >
+                        Game state types
+                    </Link>
                 </div>
                 <Footer />
             </div>

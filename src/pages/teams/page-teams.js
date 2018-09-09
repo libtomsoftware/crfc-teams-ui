@@ -7,7 +7,7 @@ import StandardEntityForm from '../../components/forms/standard-entity';
 import StandardDeleteForm from '../../components/forms/standard-delete';
 import Footer from '../../components/common/footer/footer';
 import Helpers from '../../services/helpers';
-import TeamModel from '../../models/team';
+import TeamModel, { getAgeGroup } from '../../models/team';
 import { CONFIG } from '../../config-constants';
 
 import * as accountsActions from '../../actions/accounts-actions';
@@ -178,7 +178,7 @@ class PageTeams extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_TEAMS;
+        return CONFIG.MESSAGE.INFO.NONE_SO_FAR('teams');
     }
 
     get tableLinks() {
@@ -196,7 +196,7 @@ class PageTeams extends Component {
 
         const team = this.props.teams.find(item => item._id === id);
 
-        return team ? `${team.firstname} ${team.surname}` : '';
+        return team ? `${getAgeGroup(team.agegroup, this.props.agegroups)} ${team.name}` : '';
     }
 
     render() {

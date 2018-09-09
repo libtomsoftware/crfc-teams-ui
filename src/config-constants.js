@@ -12,6 +12,9 @@ export const CONFIG = {
             GAMERESULT_UPDATE: 'Game result type update failed. Please try again later.',
             GAMERESULT_EXISTS: 'A similar game result type already exists. Change name and try again!',
             GAMERESULT_NOT_ADDED: 'Adding new game result type failed, pleae try again later.',
+            GAMESTATE_UPDATE: 'Game state type update failed. Please try again later.',
+            GAMESTATE_EXISTS: 'A similar game state type already exists. Change name and try again!',
+            GAMESTATE_NOT_ADDED: 'Adding new game state type failed, pleae try again later.',
             EMAIL_INVALID: 'This is not valid email!',
             LEAGUE_UPDATE: 'League update failed. Please try again later.',
             LEAGUE_EXISTS: 'A similar league already exists. Change short name and try again!',
@@ -30,31 +33,23 @@ export const CONFIG = {
             TEAM_UPDATE: 'Updating team failed. Please try again later.'
         },
         INFO: {
+            NONE_SO_FAR: items => {
+                return `No ${items} so far...`;
+            },
+            RESULT: {
+                ADDED: item => {
+                    return `A new ${item} has been added!`;
+                },
+                DELETED: item => {
+                    return `${item} has been successfully deleted.`;
+                },
+                UPDATED: item => {
+                    return `${item} has been successfully updated.`;
+                }
+            },
             ABOUT_TO_DELETE: 'This operation cannot be undone! Please click DELETE below only if you are sure, what you are doing.',
-            ACCOUNT_UPDATED: 'Account details have been successfully updated!',
-            ACCOUNT_DELETED: 'Account has been successfully deleted.',
-            AGEGROUP_UPDATED: 'The age groups has been successfully updated!',
-            AGEGROUP_DELETED: 'The age group has been successfuly deleted!',
-            GAMERESULT_UPDATED: 'The game result type has been successfully updated!',
-            GAMERESULT_DELETED: 'The game result type has been successfuly deleted!',
             ITS_GONE: 'Done. It\'s gone.',
-            LEAGUE_UPDATED: 'The league has been successfully updated!',
-            LEAGUE_DELETED: 'The league has been successfuly deleted!',
-            NEW_AGEGROUP_ADDED: 'A new age group has been added!',
-            NEW_GAMERESULT_ADDED: 'A new game result type has been added!',
-            NEW_TEAM_ADDED: 'A new team has been added!',
-            NEW_LEAGUE_ADDED: 'A new league has been added!',
-            NEW_OPPONENT_ADDED: 'A new opponent team has been added!',
             NEW_ACCOUNT_REGISTERED: 'Congratulations! New account has been registered. Please log in with credentials provided or register another account.',
-            NO_AGEGROUPS: 'No age groups so far...',
-            NO_GAMERESULTS: 'No game result types so far...',
-            NO_TEAMS: 'No teams so far...',
-            NO_LEAGUES: 'No leagues so far...',
-            NO_OPPONENTS: 'No opponent teams so far...',
-            OPPONENT_UPDATED: 'The opponent team has been successfully updated!',
-            OPPONENT_DELETED: 'The opponent team has been successfuly deleted!',
-            SETTINGS_UPDATED: 'Settings updated!',
-            TEAM_UPDATED: 'The team has been successfully updated!',
             TEAM_REQUIRES_AGEGROUP: 'At least one age group is required to create a team! Please go to age groups section and define an age group.',
             TEAM_REQUIRES_LEAGUE: 'At least one league is required to create a team! Please go to leagues section and add a league.',
             TEAM_REQUIRES_MANAGER: 'At least one manager is required to create a team! Please go to managers section and add a manager.'

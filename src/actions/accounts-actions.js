@@ -151,7 +151,7 @@ export function remove(id) {
         await async.remove(dispatch, {
             id,
             resource: 'accounts',
-            success: CONFIG.MESSAGE.INFO.ACCOUNT_DELETED,
+            success: CONFIG.MESSAGE.INFO.RESULT.DELETED('Account'),
             error: CONFIG.MESSAGE.ERROR.ACCOUNT_DELETE
         });
         return fetch()(dispatch);
@@ -169,7 +169,7 @@ export function edit(id, userData, accountId) {
             });
 
             loaderActions.hide()(dispatch);
-            showToast('success', CONFIG.MESSAGE.INFO.ACCOUNT_UPDATED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('Account'), dispatch);
 
             if (id === accountId) {
                 dispatch({

@@ -77,7 +77,7 @@ class PageSettingsGameResults extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_GAMERESULTS;
+        return CONFIG.MESSAGE.INFO.NONE_SO_FAR('game result types');
     }
 
     get tableLinks() {

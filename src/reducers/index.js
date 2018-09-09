@@ -3,6 +3,7 @@ import account from './account';
 import accounts from './accounts';
 import agegroups from './agegroups';
 import gameresults from './gameresults';
+import gamestates from './gamestates';
 import leagues from './leagues';
 import loader from './loader';
 import menu from './menu';
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     accounts,
     agegroups,
     gameresults,
+    gamestates,
     leagues,
     loader,
     menu,

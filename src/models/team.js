@@ -10,7 +10,7 @@ const propTypes = {
     managers: PropTypes.array
 };
 
-function getAgeGroup(value, agegroups) {
+export function getAgeGroup(value, agegroups) {
     if (!agegroups || !!!agegroups.length) {
         return '';
     }
@@ -18,7 +18,7 @@ function getAgeGroup(value, agegroups) {
     return agegroups.find(group => group._id === value).abbreviation;
 }
 
-function getLeague(value, leagues) {
+export function getLeague(value, leagues) {
     if (!leagues || !!!leagues.length) {
         return '';
     }
@@ -26,7 +26,7 @@ function getLeague(value, leagues) {
     return leagues.find(group => group._id === value).abbreviation;
 }
 
-function getManagers(values, accounts) {
+export function getManagers(values, accounts) {
     const result = [];
 
     if (!accounts || !!!accounts.length) {

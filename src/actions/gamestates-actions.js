@@ -12,27 +12,27 @@ function showToast(type, message, dispatch) {
     })(dispatch);
 }
 
-function getUpdateEvent(gameresults) {
+function getUpdateEvent(gamestates) {
     return {
-        type: types.GAMERESULTS_UPDATE,
-        gameresults
+        type: types.GAMESTATES_UPDATE,
+        gamestates
     };
 }
 
 export async function load(dispatch) {
-    return async.fetch(dispatch, 'gameresults');
+    return async.fetch(dispatch, 'gamestates');
 }
 
 export function fetch() {
-    let gameresults = [];
+    let gamestates = [];
 
     return async function (dispatch) {
-        gameresults = await load(dispatch);
+        gamestates = await load(dispatch);
 
-        dispatch(getUpdateEvent(gameresults));
+        dispatch(getUpdateEvent(gamestates));
 
         return new Promise(resolve => {
-            resolve(gameresults);
+            resolve(gamestates);
         });
     };
 }
@@ -41,18 +41,18 @@ export function add(opponentData) {
     return async function (dispatch) {
         loaderActions.show()(dispatch);
         try {
-            await axios.put(`${CONFIG.URL.API}/gameresults`, opponentData, {
+            await axios.put(`${CONFIG.URL.API}/gamestates`, opponentData, {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.RESULT.ADDED('game result type'), dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.ADDED('game state type'), dispatch);
         } catch (error) {
             let message;
 
             if (error.response && error.response.status === 409) {
-                message = CONFIG.MESSAGE.ERROR.GAMERESULT_EXISTS;
+                message = CONFIG.MESSAGE.ERROR.GAMESTATE_EXISTS;
             } else {
-                message = CONFIG.MESSAGE.ERROR.GAMERESULT_NOT_ADDED;
+                message = CONFIG.MESSAGE.ERROR.GAMESTATE_NOT_ADDED;
             }
 
             showToast('danger', message, dispatch);
@@ -67,13 +67,13 @@ export function edit(opponentData) {
     return async function (dispatch) {
         loaderActions.show()(dispatch);
         try {
-            await axios.post(`${CONFIG.URL.API}/gameresults`, Object.assign({}, opponentData), {
+            await axios.post(`${CONFIG.URL.API}/gamestates`, Object.assign({}, opponentData), {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('Game result type'), dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('Game state type'), dispatch);
         } catch (error) {
-            showToast('danger', CONFIG.MESSAGE.ERROR.GAMERESULT_UPDATE, dispatch);
+            showToast('danger', CONFIG.MESSAGE.ERROR.GAMESTATE_UPDATE, dispatch);
         }
         loaderActions.hide()(dispatch);
 
@@ -85,16 +85,16 @@ export function remove(id) {
     return async function (dispatch) {
         await async.remove(dispatch, {
             id,
-            resource: 'gameresults',
-            success: 'Game result type',
-            error: 'GAMERESULT_DELETE'
+            resource: 'gamestates',
+            success: 'Game state type',
+            error: 'GAMESTATE_DELETE'
         });
         return fetch()(dispatch);
     };
 }
 
-export function update(gameresults) {
+export function update(gamestates) {
     return function (dispatch) {
-        dispatch(getUpdateEvent(gameresults));
+        dispatch(getUpdateEvent(gamestates));
     };
 }

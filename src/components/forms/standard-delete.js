@@ -8,6 +8,7 @@ import Helpers from '../../services/helpers';
 import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
 import * as gameresultsActions from '../../actions/gameresults-actions';
+import * as gamestatesActions from '../../actions/gamestates-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
 import * as opponentsActions from '../../actions/opponents-actions';
 import * as teamsActions from '../../actions/teams-actions';
@@ -39,8 +40,13 @@ class StandardDeleteForm extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.params.id !== prevProps.params.id) {
             const items = this.props[this.props.deleteGroup];
-
-            this.handleCurrent(items);
+            if (items) {
+                this.handleCurrent(items);
+            } else {
+                this.props.actions[this.props.deleteGroup].fetch().then(fetchedItems => {
+                    this.handleCurrent(fetchedItems);
+                });
+            }
         }
     }
 
@@ -131,6 +137,7 @@ function mapDispatchToProps(dispatch) {
             accounts: bindActionCreators(accountsActions, dispatch),
             agegroups: bindActionCreators(agegroupsActions, dispatch),
             gameresults: bindActionCreators(gameresultsActions, dispatch),
+            gamestates: bindActionCreators(gamestatesActions, dispatch),
             leagues: bindActionCreators(leaguesActions, dispatch),
             opponents: bindActionCreators(opponentsActions, dispatch),
             teams: bindActionCreators(teamsActions, dispatch),

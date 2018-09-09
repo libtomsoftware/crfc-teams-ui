@@ -45,7 +45,7 @@ export function add(agegroupData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.NEW_AGEGROUP_ADDED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.ADDED('age group'), dispatch);
         } catch (error) {
             let message;
 
@@ -70,7 +70,7 @@ export function edit(agegroupData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.AGEGROUP_UPDATED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('Age group'), dispatch);
         } catch (error) {
             showToast('danger', CONFIG.MESSAGE.ERROR.AGEGROUP_UPDATE, dispatch);
         }
@@ -84,7 +84,7 @@ export function remove(id) {
         await async.remove(dispatch, {
             id,
             resource: 'agegroups',
-            success: 'AGEGROUP_DELETED',
+            success: 'Agegroup',
             error: 'AGEGROUP_DELETE'
         });
         return fetch()(dispatch);

@@ -35,7 +35,7 @@ export function find( managerId ) {
         const leagues = await leaguesActions.load(dispatch);
 
         if (!!!teams || !!!teams.length) {
-            showToast('warning', CONFIG.MESSAGE.INFO.NO_TEAMS, dispatch);
+            showToast('warning', CONFIG.MESSAGE.INFO.NONE_SO_FAR('teams'), dispatch);
 
             return {
                 type: types.TEAM_UPDATE,

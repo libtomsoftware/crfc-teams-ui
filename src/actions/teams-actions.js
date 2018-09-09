@@ -45,7 +45,7 @@ export function add(agegroupData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.NEW_TEAM_ADDED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.ADDED('team'), dispatch);
         } catch (error) {
             let message;
 
@@ -70,7 +70,7 @@ export function edit(agegroupData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.TEAM_UPDATED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('Team'), dispatch);
         } catch (error) {
             showToast('danger', CONFIG.MESSAGE.ERROR.TEAM_UPDATE, dispatch);
         }
@@ -84,7 +84,7 @@ export function remove(id) {
         await async.remove(dispatch, {
             id,
             resource: 'teams',
-            success: 'TEAM_DELETED',
+            success: 'Team',
             error: 'TEAM_DELETE'
         });
         return fetch()(dispatch);

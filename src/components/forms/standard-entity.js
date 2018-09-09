@@ -9,6 +9,7 @@ import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
 import * as gameresultsActions from '../../actions/gameresults-actions';
+import * as gamestatesActions from '../../actions/gamestates-actions';
 import * as opponentsActions from '../../actions/opponents-actions';
 import * as teamsActions from '../../actions/teams-actions';
 import * as toastActions from '../../actions/toast-actions';
@@ -31,7 +32,11 @@ class StandardEntityForm extends Component {
 
     componentDidMount() {
         if (this.props.group) {
-            this.props.actions[this.props.group].fetch();
+            const items = this.props[this.props.group];
+
+            if (!items.length) {
+                this.props.actions[this.props.group].fetch();
+            }
         }
     }
 
@@ -91,6 +96,8 @@ class StandardEntityForm extends Component {
     }
 
     getTextControl(formGroup) {
+        const defaultValue = formGroup && formGroup.name && this.defaultValues && this.defaultValues[formGroup.name] ? this.defaultValues[formGroup.name] : '';
+
         return (
             <input
                 className="form-control"
@@ -99,7 +106,7 @@ class StandardEntityForm extends Component {
                 placeholder={`${formGroup.placeholder}`}
                 ref={this.fields[formGroup.name]}
                 maxLength={`${formGroup.maxLength} || 36`}
-                defaultValue={this.defaultValues ? this.defaultValues[formGroup.name] : ''}
+                defaultValue={defaultValue}
             />
         );
     }
@@ -213,6 +220,7 @@ function mapStateToProps(state) {
         accounts: state.accounts,
         agegroups: state.agegroups,
         gameresults: state.gameresults,
+        gamestates: state.gamestates,
         leagues: state.leagues,
         loader: state.loader,
         opponents: state.opponents,
@@ -226,6 +234,7 @@ function mapDispatchToProps(dispatch) {
             accounts: bindActionCreators(accountsActions, dispatch),
             agegroups: bindActionCreators(agegroupsActions, dispatch),
             gameresults: bindActionCreators(gameresultsActions, dispatch),
+            gamestates: bindActionCreators(gamestatesActions, dispatch),
             leagues: bindActionCreators(leaguesActions, dispatch),
             opponents: bindActionCreators(opponentsActions, dispatch),
             teams: bindActionCreators(teamsActions, dispatch),

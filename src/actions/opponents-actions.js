@@ -45,7 +45,7 @@ export function add(opponentData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.NEW_OPPONENT_ADDED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.ADDED('opponent team'), dispatch);
         } catch (error) {
             let message;
 
@@ -71,7 +71,7 @@ export function edit(opponentData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.OPPONENT_UPDATED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('The opponent team'), dispatch);
         } catch (error) {
             showToast('danger', CONFIG.MESSAGE.ERROR.OPPONENT_UPDATE, dispatch);
         }
@@ -86,7 +86,7 @@ export function remove(id) {
         await async.remove(dispatch, {
             id,
             resource: 'opponents',
-            success: 'OPPONENT_DELETED',
+            success: 'Opponent',
             error: 'OPPONENT_DELETE'
         });
         return fetch()(dispatch);

@@ -80,7 +80,7 @@ class PageSettingsAgeGroups extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NO_AGEGROUPS;
+        return CONFIG.MESSAGE.INFO.NONE_SO_FAR('age groups');
     }
 
     get tableLinks() {

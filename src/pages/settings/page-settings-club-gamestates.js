@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as opponentsActions from '../../actions/opponents-actions';
+import * as gamestatesActions from '../../actions/gamestates-actions';
 import { StandardTable } from '../../components/tables/standard-table';
 import StandardEntityForm from '../../components/forms/standard-entity';
 import StandardDeleteForm from '../../components/forms/standard-delete';
 import Footer from '../../components/common/footer/footer';
 import Helpers from '../../services/helpers';
-import OpponentModel from '../../models/opponent';
+import GameStateModel from '../../models/game-state';
 import { CONFIG } from '../../config-constants';
 import './page-settings.css';
 
-class PageSettingsOpponents extends Component {
+class PageSettingsGameStates extends Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        this.props.actions.opponents.fetch();
+        this.props.actions.gamestates.fetch();
     }
 
     get isTablePage() {
@@ -30,7 +30,7 @@ class PageSettingsOpponents extends Component {
 
     get fields() {
         return [
-            'name', 'description'
+            'name'
         ];
     }
 
@@ -38,22 +38,18 @@ class PageSettingsOpponents extends Component {
         return [{
             formGroups: [{
                 name: 'name',
-                label: 'Team name',
-                placeholder: 'name of the team',
+                label: 'Type',
+                placeholder: 'type of the game result',
                 isMandatory: true
-            }, {
-                name: 'description',
-                label: 'Additional description',
-                placeholder: 'additional team description, (e.g. Clarets, Blues)'
             }]
         }];
     }
 
     get bottomLinks() {
         return [{
-            href: '/settings/opponents',
+            href: '/settings/gamestates',
             class: 'btn btn-primary',
-            label: 'List of opponent teams'
+            label: 'List of game result types'
         }, {
             class: 'btn btn-secondary',
             href: '/settings',
@@ -62,16 +58,16 @@ class PageSettingsOpponents extends Component {
     }
 
     get tableData() {
-        const opponents = this.props.opponents;
+        const gamestates = this.props.gamestates;
 
-        if (!opponents || !!!opponents.length) {
+        if (!gamestates || !!!gamestates.length) {
             return [];
         }
 
         const tableData = {
-            header: ['Name', 'Description', 'Actions'],
-            items: opponents.map(opponent => {
-                return new OpponentModel(opponent);
+            header: ['Type', 'Actions'],
+            items: gamestates.map(gamestate => {
+                return new GameStateModel(gamestate);
             }).sort((a, b) => {
                 return Helpers.sortAscending('name')(a, b);
             })
@@ -81,34 +77,34 @@ class PageSettingsOpponents extends Component {
     }
 
     get tableMessage() {
-        return CONFIG.MESSAGE.INFO.NONE_SO_FAR('opponent teams');
+        return CONFIG.MESSAGE.INFO.NONE_SO_FAR('game state types');
     }
 
     get tableLinks() {
         return [{
             label: 'Add new',
             class: 'btn-primary',
-            href: '/settings/opponents/add'
+            href: '/settings/gamestates/add'
         }];
     }
 
     extractSummary(id) {
-        if (!!!this.props.opponents.length) {
+        if (!!!this.props.gamestates || !!!this.props.gamestates.length) {
             return '';
         }
 
-        const opponent = this.props.opponents.find(item => item._id === id);
+        const gamestate = this.props.gamestates.find(item => item._id === id);
 
-        return opponent ? opponent.abbreviation : '';
+        return gamestate ? gamestate.abbreviation : '';
     }
 
     render() {
         return (
-            <div className="page page-settings page-settings-opponents">
+            <div className="page page-settings page-settings-gamestates">
                 <StandardTable
-                    group="opponents"
-                    title="Opponent teams"
-                    tableClass="table-opponents"
+                    group="gamestates"
+                    title="Game Result Types"
+                    tableClass="table-gamestates"
                     message={this.tableMessage}
                     tableData={this.tableData}
                     tableLinks={this.tableLinks}
@@ -116,17 +112,17 @@ class PageSettingsOpponents extends Component {
                     loader={this.props.loader}
                 />
                 <StandardEntityForm
-                    group="opponents"
+                    group="gamestates"
                     groupPrefix="settings"
-                    item="opponent"
-                    title="new opponent team"
+                    item="gamestate"
+                    title="new type"
                     fields={this.fields}
                     fieldsets={this.fieldsets}
                     bottomLinks={this.bottomLinks}
                 />
                 <StandardDeleteForm
-                    deleteGroup="opponents"
-                    deleteSubject={`Opponent team ${this.extractSummary(this.props.params.id)}`}
+                    deleteGroup="gamestates"
+                    deleteSubject={`Game state type ${this.extractSummary(this.props.params.id)}`}
                     generalMessage={CONFIG.MESSAGE.INFO.ABOUT_TO_DELETE}
                     bottomLinks={this.bottomLinks}
                 />
@@ -138,7 +134,7 @@ class PageSettingsOpponents extends Component {
 
 function mapStateToProps(state) {
     return {
-        opponents: state.opponents,
+        gamestates: state.gamestates,
         loader: state.loader
     };
 }
@@ -146,9 +142,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: {
-            opponents: bindActionCreators(opponentsActions, dispatch)
+            gamestates: bindActionCreators(gamestatesActions, dispatch)
         }
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsOpponents);
+export default connect(mapStateToProps, mapDispatchToProps)(PageSettingsGameStates);

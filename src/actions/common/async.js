@@ -38,7 +38,7 @@ export async function remove(dispatch, params) {
             withCredentials: true
         });
 
-        showToast('success', CONFIG.MESSAGE.INFO[params.success], dispatch);
+        showToast('success', CONFIG.MESSAGE.INFO.RESULT.DELETED(params.success), dispatch);
     } catch (error) {
         showToast('danger', CONFIG.MESSAGE.ERROR[params.error], dispatch);
     }

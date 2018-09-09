@@ -45,7 +45,7 @@ export function add(leagueData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.NEW_LEAGUE_ADDED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.ADDED('LEAGUE'), dispatch);
         } catch (error) {
             let message;
 
@@ -71,7 +71,7 @@ export function edit(leagueData) {
                 withCredentials: true
             });
 
-            showToast('success', CONFIG.MESSAGE.INFO.LEAGUE_UPDATED, dispatch);
+            showToast('success', CONFIG.MESSAGE.INFO.RESULT.UPDATED('League'), dispatch);
         } catch (error) {
             showToast('danger', CONFIG.MESSAGE.ERROR.LEAGUE_UPDATE, dispatch);
         }
@@ -86,7 +86,7 @@ export function remove(id) {
         await async.remove(dispatch, {
             id,
             resource: 'leagues',
-            success: 'LEAGUE_DELETED',
+            success: 'League',
             error: 'LEAGUE_DELETE'
         });
         return fetch()(dispatch);
