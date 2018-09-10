@@ -9,6 +9,7 @@ import loader from './loader';
 import menu from './menu';
 import nav from './nav';
 import opponents from './opponents';
+import players from './players';
 import team from './team';
 import teams from './teams';
 import toast from './toast';
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     menu,
     nav,
     opponents,
+    players,
     team,
     teams,
     toast

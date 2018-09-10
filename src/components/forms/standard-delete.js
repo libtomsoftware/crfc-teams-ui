@@ -11,6 +11,7 @@ import * as gameresultsActions from '../../actions/gameresults-actions';
 import * as gamestatesActions from '../../actions/gamestates-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
 import * as opponentsActions from '../../actions/opponents-actions';
+import * as playersActions from '../../actions/players-actions';
 import * as teamsActions from '../../actions/teams-actions';
 import * as toastActions from '../../actions/toast-actions';
 
@@ -140,6 +141,7 @@ function mapDispatchToProps(dispatch) {
             gamestates: bindActionCreators(gamestatesActions, dispatch),
             leagues: bindActionCreators(leaguesActions, dispatch),
             opponents: bindActionCreators(opponentsActions, dispatch),
+            players: bindActionCreators(playersActions, dispatch),
             teams: bindActionCreators(teamsActions, dispatch),
             toast: bindActionCreators(toastActions, dispatch)
         }

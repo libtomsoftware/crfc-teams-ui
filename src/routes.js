@@ -6,6 +6,7 @@ import Helpers from './services/helpers';
 import Layout from './pages/layout';
 import PageHome from './pages/home/page-home';
 import PageLogin from './pages/login/page-login';
+import PagePlayers from './pages/players/page-players';
 import PageRegister from './pages/register/page-register';
 import PageSettings from './pages/settings/page-settings';
 import PageSettingsClubAgeGroups from './pages/settings/page-settings-club-agegroups';
@@ -59,6 +60,10 @@ export default (
         <Route path="accounts" component={PageAccounts} />
         <Route path="accounts/:type" component={PageAccounts} />
         <Route path="accounts/:type/:id" component={PageAccounts} />
+
+        <Route path="players" component={PagePlayers} />
+        <Route path="players/:type" component={PagePlayers} />
+        <Route path="players/:type/:id" component={PagePlayers} />
 
         <Route path="teams" component={PageTeams} />
         <Route path="teams/:type" component={PageTeams} />

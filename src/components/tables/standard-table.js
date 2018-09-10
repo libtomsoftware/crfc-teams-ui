@@ -68,7 +68,7 @@ export const StandardTable = (props) => {
 
                                                     function getCell(value) {
                                                         let cellContent;
-                                                        if (helpers.isArray(value)) {
+                                                        if (value && helpers.isArray(value)) {
                                                             let valueStringified = '';
                                                             const max = value.length;
 

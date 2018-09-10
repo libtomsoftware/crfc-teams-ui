@@ -50,6 +50,7 @@ export const CONFIG = {
             ABOUT_TO_DELETE: 'This operation cannot be undone! Please click DELETE below only if you are sure, what you are doing.',
             ITS_GONE: 'Done. It\'s gone.',
             NEW_ACCOUNT_REGISTERED: 'Congratulations! New account has been registered. Please log in with credentials provided or register another account.',
+            PLAYER_REQUIRES_TEAM: 'At least one team is required to create a player! Please go to teams section and define an team.',
             TEAM_REQUIRES_AGEGROUP: 'At least one age group is required to create a team! Please go to age groups section and define an age group.',
             TEAM_REQUIRES_LEAGUE: 'At least one league is required to create a team! Please go to leagues section and add a league.',
             TEAM_REQUIRES_MANAGER: 'At least one manager is required to create a team! Please go to managers section and add a manager.'
