@@ -24,7 +24,7 @@ class PagePlayers extends Component {
 
     componentDidMount() {
         this.props.actions.teams.fetch().then(teams => {
-            if (!!!teams.length) {
+            if (!!!teams || !!!teams.length) {
                 this.props.actions.toast({
                     message: CONFIG.INFO.PLAYER_REQUIRES_TEAM
                 });

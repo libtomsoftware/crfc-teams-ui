@@ -34,19 +34,25 @@ export function getManagers(values, accounts) {
     }
 
     const manager = accounts.find(group => group._id === values[0]);
-    const manager2 = accounts.find(group => group._id === values[1]);
+    const coach = accounts.find(group => group._id === values[1]);
 
     if (manager) {
         result.push( {
+            _id: manager._id,
             firstname: manager.firstname,
-            surname: manager.surname
+            surname: manager.surname,
+            phone: manager.phone,
+            email: manager.username
         });
     }
 
-    if (manager2) {
+    if (coach) {
         result.push( {
-            firstname: manager2.firstname,
-            surname: manager2.surname
+            _id: coach._id,
+            firstname: coach.firstname,
+            surname: coach.surname,
+            phone: coach.phone,
+            email: coach.username
         });
     }
 

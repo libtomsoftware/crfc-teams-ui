@@ -1,0 +1,15 @@
+.page-team h1 {
+    text-align: center;
+}
+
+.page-team-inner {
+    width: 100%;
+}
+
+.page-team-area {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: center;
+}
