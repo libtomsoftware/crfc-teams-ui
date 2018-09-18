@@ -1,6 +1,6 @@
 {
-  "short_name": "footy-assistant-ui",
-  "name": "Footy Assistant UI",
+  "short_name": "crfc-teams-app",
+  "name": "CRFC Teams Management App",
   "icons": [
     {
       "src": "favicon.ico",
