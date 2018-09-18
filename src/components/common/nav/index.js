@@ -38,9 +38,16 @@ class Nav extends Component {
             {
                 route: '/teams',
                 label: 'teams',
-                icon: 'fa-users',
+                icon: 'fa-sitemap',
                 reqLogin: true,
                 rank: 1
+            },
+            {
+                route: '/players',
+                label: 'players',
+                icon: 'fa-users',
+                reqLogin: true,
+                param: 'all'
             },
             {
                 route: '/settings',
@@ -55,9 +62,15 @@ class Nav extends Component {
     get menuLinks() {
         return [
             {
+                route: '/players',
+                label: 'players',
+                icon: 'fa-users',
+                reqLogin: true
+            },
+            {
                 route: '/team',
                 label: 'team',
-                icon: 'fa-users',
+                icon: 'fa-sitemap',
                 reqLogin: true,
                 param: this.account._id
             },

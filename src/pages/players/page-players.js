@@ -120,10 +120,24 @@ class PagePlayers extends Component {
     }
 
     get tableData() {
-        const players = this.props.players;
+        let players = this.props.players;
 
         if (!players || !!!players.length) {
             return [];
+        }
+
+        if (!this.shouldShowAllPlayers()) {
+            const team = this.props.teams.find( item => {
+                return this.props.account._id === item.manager || this.props.account._id === item.manager2;
+            });
+
+            if ( team ) {
+                players = players.filter( player => {
+                    return player.team === team._id;
+                });
+            } else {
+                players = [];
+            }
         }
 
         const tableData = {
@@ -150,6 +164,13 @@ class PagePlayers extends Component {
         }];
     }
 
+    shouldShowAllPlayers() {
+        const hasAllInRoute = this.props.params.type && this.props.params.type === 'all';
+        const isAdmin = this.props.account.rank < 2;
+
+        return hasAllInRoute && isAdmin;
+    }
+
     extractSummary(id) {
         if (!!!this.props.players.length) {
             return '';
@@ -165,7 +186,7 @@ class PagePlayers extends Component {
             <div className="page page-players">
                 <StandardTable
                     group="players"
-                    title="Team Players"
+                    title={`${this.shouldShowAllPlayers() ? 'All' : 'Team'} Players`}
                     tableClass="table-players"
                     message={this.tableMessage}
                     tableData={this.tableData}
@@ -195,6 +216,7 @@ class PagePlayers extends Component {
 
 function mapStateToProps(state) {
     return {
+        account: state.account,
         accounts: state.accounts,
         agegroups: state.agegroups,
         leagues: state.leagues,

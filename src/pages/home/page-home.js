@@ -20,7 +20,9 @@ class PageHome extends Component {
     }
 
     componentDidMount() {
-        this.fetchData();
+        if (this.props.account) {
+            this.fetchData();
+        }
     }
 
     fetchData() {
@@ -41,15 +43,17 @@ class PageHome extends Component {
     render() {
         return (
             <div className="page page-home">
-                <div className="card card-stats bg-light mb-3">
-                    <div className="card-header">Club in numbers</div>
-                    <div className="card-body">
-                        {this.props.accounts.length > 0 && <p className="card-text animated fadeIn">{this.props.accounts.length} managers</p>}
-                        {this.props.teams.length > 0 && <p className="card-text animated fadeIn">{this.props.teams.length} teams</p>}
-                        {this.props.agegroups.length > 0 && <p className="card-text animated fadeIn">{this.props.agegroups.length} age groups</p>}
-                        {this.props.leagues.length > 0 && <p className="card-text animated fadeIn">{this.props.leagues.length} leagues</p>}
+                {this.props.account &&
+                    <div className="card card-stats bg-light mb-3">
+                        <div className="card-header">Club in numbers</div>
+                        <div className="card-body">
+                            {this.props.accounts.length > 0 && <p className="card-text animated fadeIn">{this.props.accounts.length} managers</p>}
+                            {this.props.teams.length > 0 && <p className="card-text animated fadeIn">{this.props.teams.length} teams</p>}
+                            {this.props.agegroups.length > 0 && <p className="card-text animated fadeIn">{this.props.agegroups.length} age groups</p>}
+                            {this.props.leagues.length > 0 && <p className="card-text animated fadeIn">{this.props.leagues.length} leagues</p>}
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         );
     }

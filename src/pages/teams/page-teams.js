@@ -167,8 +167,12 @@ class PageTeams extends Component {
 
         const tableData = {
             header: ['Age Group', 'Name', 'League', 'Manager(s)', 'Link', 'Actions'],
-            items: teams.map(team => {
-                return new TeamModel(team, this.props.accounts, this.props.agegroups, this.props.leagues);
+            items: teams.map(item => {
+                const team = new TeamModel(item, this.props.accounts, this.props.agegroups, this.props.leagues);
+                team.managers = team.managers.map(manager => {
+                    return `${manager.firstname} ${manager.surname}`;
+                });
+                return team;
             }).sort((a, b) => {
                 return Helpers.sortAscending('agegroup')(a, b);
             })

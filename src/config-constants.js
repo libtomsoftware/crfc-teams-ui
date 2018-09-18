@@ -25,6 +25,8 @@ export const CONFIG = {
             OPPONENT_NOT_ADDED: 'Adding new opponent team failed, pleae try again later.',
             PASSWORD_INVALID: 'The password provided is not valid. It should be at least 8 characters long, but no longer than 16 characters, contain only alphanumeric characters and at least one number.',
             PASSWORDS_MISMATCH: 'Passwords provided don\'t seem to match.',
+            PLAYER_EXISTS: 'A similar player already exists. Change name and / or date of birth and try again!',
+            PLAYER_NOT_ADDED: 'Adding new player failed, pleae try again later.',
             PHONE_INVALID: 'This is not valid phone number! Please use digits only.',
             REGISTRATION: 'Registration unsuccessful. Please make sure you have provided correct registration details! If you did and it still doesn\'t work, please try again later',
             SOMETHING_WRONG: 'Oops, something is wrong...',
