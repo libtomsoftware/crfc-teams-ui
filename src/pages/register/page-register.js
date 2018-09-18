@@ -117,6 +117,9 @@ class PageRegister extends Component {
     render() {
         return (
             <div className="page page-register">
+                <div className="page-logo">
+                    <img src="./img/crfc-logo-small.png" alt="CRFC logo" />
+                </div>
                 <div className="register-form standard-form">
                     <div className="standard-form-fields">
                         <div className="card mb-3">

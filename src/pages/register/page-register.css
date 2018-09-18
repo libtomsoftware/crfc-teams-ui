@@ -1,3 +1,5 @@
 .page-register {
     flex-direction: column;
+    margin-top: 0;
+    padding: 0;
 }

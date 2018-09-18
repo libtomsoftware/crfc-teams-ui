@@ -21,7 +21,7 @@ class Footer extends React.Component {
         return (
             <footer>
                 <span className="footer-account-status">
-                    {this.props.account ? `logged in as ${this.props.account.firstname} ${this.props.account.surname}` : 'Footy Assistant'}
+                    <a className="footer-libtom-logo" href="http://libtom.com" target="_blank">Libtom Software Ltd.</a>
                 </span>
             </footer>
         );

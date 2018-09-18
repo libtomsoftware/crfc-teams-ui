@@ -35,9 +35,8 @@ body,
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 64px;
+  margin: 64px 0;
   padding: 10px 0;
-  height: 100%;
 }
 
 .form-field-invalid input {

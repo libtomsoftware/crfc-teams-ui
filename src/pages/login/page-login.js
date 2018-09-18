@@ -48,6 +48,9 @@ class PageLogin extends Component {
     render() {
         return (
             <div className="page page-login">
+                <div className="page-logo">
+                    <img src="./img/crfc-logo-small.png" alt="CRFC logo" />
+                </div>
                 <div className="login-form standard-form">
                     <div className="standard-form-fields">
                         <div className="card mb-3">

@@ -1,3 +1,27 @@
 .card-stats .card-title {
     text-align: right;
 }
+
+.page-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.page-home-inner {
+    width: 75%;
+}
+
+.page-home-inner h1 {
+    background: url('/img/crfc-logo-small.png') no-repeat 0 center;
+    background-size: 75px;
+    padding-left: 100px;
+    font-size: 3em;
+    line-height: 100px;
+}
+
+.page-home-stats-area {
+    display: flex;
+    justify-content: space-around;
+}

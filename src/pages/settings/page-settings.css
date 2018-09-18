@@ -5,3 +5,28 @@
     align-items: center;
     align-content: center;
 }
+
+.page-settings-gateway {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.page-settings-gateway .lead {
+    width: 750px;
+    text-align: center;
+    margin: 36px 0;
+}
+
+.page-settings-gateway-inner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.page-settings-gateway-inner .list-group {
+    margin: 12px;
+}

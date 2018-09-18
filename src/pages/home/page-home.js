@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
@@ -44,13 +45,23 @@ class PageHome extends Component {
         return (
             <div className="page page-home">
                 {this.props.account &&
-                    <div className="card card-stats bg-light mb-3">
-                        <div className="card-header">Club in numbers</div>
-                        <div className="card-body">
-                            {this.props.accounts.length > 0 && <p className="card-text animated fadeIn">{this.props.accounts.length} managers</p>}
-                            {this.props.teams.length > 0 && <p className="card-text animated fadeIn">{this.props.teams.length} teams</p>}
-                            {this.props.agegroups.length > 0 && <p className="card-text animated fadeIn">{this.props.agegroups.length} age groups</p>}
-                            {this.props.leagues.length > 0 && <p className="card-text animated fadeIn">{this.props.leagues.length} leagues</p>}
+                    <div className="page-home-inner jumbotron">
+                        <h1 className="display-3">Cassiobury Rangers FC</h1>
+                        <p className="lead">Welcome to CRFC teams management app. Please use the menu buttons in the nav bar above to navigate or go directly to teams page using the button below.</p>
+                        <p className="lead">
+                            <Link
+                                className="btn btn-primary btn-lg"
+                                to="/teams"
+                            >
+                                Go to teams
+                            </Link>
+                        </p>
+                        <hr className="my-4" />
+                        <div className="page-home-stats-area">
+                            {this.props.accounts.length > 0 && <span className="animated fadeIn">{this.props.accounts.length} managers</span>}
+                            {this.props.teams.length > 0 && <span className="animated fadeIn">{this.props.teams.length} teams</span>}
+                            {this.props.agegroups.length > 0 && <span className="animated fadeIn">{this.props.agegroups.length} age groups</span>}
+                            {this.props.leagues.length > 0 && <span className="animated fadeIn">{this.props.leagues.length} leagues</span>}
                         </div>
                     </div>
                 }
@@ -61,6 +72,7 @@ class PageHome extends Component {
 
 function mapStateToProps(state) {
     return {
+        account: state.account,
         accounts: state.accounts,
         agegroups: state.agegroups,
         leagues: state.leagues,

@@ -19,55 +19,61 @@ class PageSettings extends Component {
 
     render() {
         return (
-            <div className="page page-settings">
-
-                <div className="list-group">
-                    <div className="list-group-item active">
-                        Club settings
+            <div className="page page-settings page-settings-gateway">
+                <h1 className="display-5">Settings</h1>
+                <p className="lead">These settings are required to populate dropdowns in other forms within the application. Please choose one of the options below.</p>
+                <div className="page-settings-gateway-inner">
+                    <div className="list-group">
+                        <div className="list-group-item active">
+                            Club settings
+                        </div>
+                        <Link
+                            className="list-group-item list-group-item-action"
+                            to={'/settings/agegroups'}
+                        >
+                            Age Groups
+                        </Link>
                     </div>
-                    <Link
-                        className="list-group-item list-group-item-action"
-                        to={'/settings/agegroups'}
-                    >
-                        Age Groups
-                    </Link>
+
+                    <div className="list-group">
+                        <div className="list-group-item active">
+                            Competition settings
+                        </div>
+                        <Link
+                            className="list-group-item list-group-item-action"
+                            to={'/settings/leagues'}
+                        >
+                            Leagues
+                        </Link>
+                        <Link
+                            className="list-group-item list-group-item-action"
+                            to={'/settings/opponents'}
+                        >
+                            Opponents
+                        </Link>
+                    </div>
+
                 </div>
 
-                <div className="list-group">
-                    <div className="list-group-item active">
-                        Competition settings
+                {false &&
+                    <div className="list-group">
+                        <div className="list-group-item active">
+                            Fixtures settings
+                        </div>
+                        <Link
+                            className="list-group-item list-group-item-action"
+                            to={'/settings/gameresults'}
+                        >
+                            Game result types
+                        </Link>
+                        <Link
+                            className="list-group-item list-group-item-action"
+                            to={'/settings/gamestates'}
+                        >
+                            Game state types
+                        </Link>
                     </div>
-                    <Link
-                        className="list-group-item list-group-item-action"
-                        to={'/settings/leagues'}
-                    >
-                        Leagues
-                    </Link>
-                    <Link
-                        className="list-group-item list-group-item-action"
-                        to={'/settings/opponents'}
-                    >
-                        Opponents
-                    </Link>
-                </div>
-
-                <div className="list-group">
-                    <div className="list-group-item active">
-                        Fixtures settings
-                    </div>
-                    <Link
-                        className="list-group-item list-group-item-action"
-                        to={'/settings/gameresults'}
-                    >
-                        Game result types
-                    </Link>
-                    <Link
-                        className="list-group-item list-group-item-action"
-                        to={'/settings/gamestates'}
-                    >
-                        Game state types
-                    </Link>
-                </div>
+                }
                 <Footer />
             </div>
         );

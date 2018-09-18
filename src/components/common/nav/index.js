@@ -20,6 +20,70 @@ class Nav extends Component {
     }
 
     get navLinks() {
+        // return [
+        //     {
+        //         route: '/home',
+        //         label: 'home',
+        //         icon: 'fa-home',
+        //         reqLogin: false
+        //     },
+        //     {
+        //         route: '/accounts',
+        //         label: 'managers',
+        //         icon: 'fa-user-tie',
+        //         reqLogin: true,
+        //         rank: 1,
+        //         separator: true
+        //     },
+        //     {
+        //         route: '/teams',
+        //         label: 'teams',
+        //         icon: 'fa-sitemap',
+        //         reqLogin: true,
+        //         rank: 1
+        //     },
+        //     {
+        //         route: '/players',
+        //         label: 'players',
+        //         icon: 'fa-users',
+        //         reqLogin: true,
+        //         param: 'all'
+        //     },
+        //     {
+        //         route: '/settings',
+        //         label: 'settings',
+        //         icon: 'fa-sliders-h',
+        //         reqLogin: true,
+        //         rank: 1
+        //     }
+        // ];
+
+        return [];
+    }
+
+    get menuLinks() {
+        // return [
+        //     {
+        //         route: '/players',
+        //         label: 'players',
+        //         icon: 'fa-users',
+        //         reqLogin: true
+        //     },
+        //     {
+        //         route: '/team',
+        //         label: 'team',
+        //         icon: 'fa-sitemap',
+        //         reqLogin: true,
+        //         param: this.account._id
+        //     },
+        //     {
+        //         route: '/account/edit',
+        //         label: 'account',
+        //         icon: 'fa-id-card',
+        //         reqLogin: true,
+        //         param: this.account._id
+        //     }
+        // ];
         return [
             {
                 route: '/home',
@@ -43,36 +107,11 @@ class Nav extends Component {
                 rank: 1
             },
             {
-                route: '/players',
-                label: 'players',
-                icon: 'fa-users',
-                reqLogin: true,
-                param: 'all'
-            },
-            {
                 route: '/settings',
                 label: 'settings',
                 icon: 'fa-sliders-h',
                 reqLogin: true,
                 rank: 1
-            }
-        ];
-    }
-
-    get menuLinks() {
-        return [
-            {
-                route: '/players',
-                label: 'players',
-                icon: 'fa-users',
-                reqLogin: true
-            },
-            {
-                route: '/team',
-                label: 'team',
-                icon: 'fa-sitemap',
-                reqLogin: true,
-                param: this.account._id
             },
             {
                 route: '/account/edit',
@@ -126,13 +165,17 @@ class Nav extends Component {
             <nav className="nav-wrapper">
                 {this.isLoggedIn() &&
                     <div className="nav-bar bg-primary">
-                        <button
-                            className="nav-toggler"
-                            type="button"
-                            onClick={this.toggleNav}
-                        >
-                            <span className="nav-toggler-icon" />
-                        </button>
+                        <a className="nav-crfc-logo" href="http://cassioburyrangersfc.co.uk" target="_blank">CRFC</a>
+                        {this.props.account && <span className="nav-greetings">{`Welcome, ${this.props.account.firstname} ${this.props.account.surname}!`}</span>}
+                        {false &&
+                            <button
+                                className="nav-toggler"
+                                type="button"
+                                onClick={this.toggleNav}
+                            >
+                                <span className="nav-toggler-icon" />
+                            </button>
+                        }
 
                         {this.isLoggedIn() &&
                             <ul className="menu-links">
@@ -153,7 +196,7 @@ class Nav extends Component {
                     </div>
                 }
 
-                {this.isLoggedIn() &&
+                {false && this.isLoggedIn() &&
                     <ul className={`nav-links fast animated ${this.props.nav ? 'show fadeInLeft' : ''}`}>
                         {this.navLinks.map((link, index) => {
                             const isShown = !link.reqLogin || (link.reqLogin && this.isLoggedIn() && this.hasEnoughRank(link.rank));
