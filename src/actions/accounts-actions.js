@@ -54,7 +54,7 @@ export function login(username, password) {
                 sessionStorage.setItem(CONFIG.STORAGE_KEY.SESSION.USER_DATA, JSON.stringify(userData));
                 setTimeout(() => {
                     loaderActions.hide()(dispatch);
-                    browserHistory.push('/home');
+                    browserHistory.push('https://crfcapp.libtom.com/');
                 }, 250);
             }
         } catch (error) {

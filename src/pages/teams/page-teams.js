@@ -80,7 +80,7 @@ class PageTeams extends Component {
     }
 
     get managersDropdownOptions() {
-        if (!this.props.accounts.length) {
+        if (!this.props.accounts || !this.props.accounts.length) {
             return [];
         }
 

@@ -95,7 +95,7 @@ class PageAccounts extends Component {
     }
 
     extractSummary(id) {
-        if (!!!this.props.accounts.length) {
+        if (!this.props.accounts || !!!this.props.accounts.length) {
             return '';
         }
 

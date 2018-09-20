@@ -6,6 +6,7 @@ import * as accountsActions from '../../actions/accounts-actions';
 import * as agegroupsActions from '../../actions/agegroups-actions';
 import * as leaguesActions from '../../actions/leagues-actions';
 import * as teamsActions from '../../actions/teams-actions';
+import Cookies from '../../services/cookies';
 import './page-home.css';
 
 class PageHome extends Component {
@@ -21,7 +22,7 @@ class PageHome extends Component {
     }
 
     componentDidMount() {
-        if (this.props.account) {
+        if (this.props.account && Cookies.read('footy-token')) {
             this.fetchData();
         }
     }
@@ -58,10 +59,10 @@ class PageHome extends Component {
                         </p>
                         <hr className="my-4" />
                         <div className="page-home-stats-area">
-                            {this.props.accounts.length > 0 && <span className="animated fadeIn">{this.props.accounts.length} managers</span>}
-                            {this.props.teams.length > 0 && <span className="animated fadeIn">{this.props.teams.length} teams</span>}
-                            {this.props.agegroups.length > 0 && <span className="animated fadeIn">{this.props.agegroups.length} age groups</span>}
-                            {this.props.leagues.length > 0 && <span className="animated fadeIn">{this.props.leagues.length} leagues</span>}
+                            {this.props.accounts && this.props.accounts.length > 0 && <span className="animated fadeIn">{this.props.accounts.length} managers</span>}
+                            {this.props.teams && this.props.teams.length > 0 && <span className="animated fadeIn">{this.props.teams.length} teams</span>}
+                            {this.props.agegroups && this.props.agegroups.length > 0 && <span className="animated fadeIn">{this.props.agegroups.length} age groups</span>}
+                            {this.props.leagues && this.props.leagues.length > 0 && <span className="animated fadeIn">{this.props.leagues.length} leagues</span>}
                         </div>
                     </div>
                 }
