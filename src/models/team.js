@@ -88,7 +88,7 @@ export default class TeamModel {
         this.league = getLeague(data.league, leagues);
         this.managers = getManagers([data.manager, data.manager2], accounts);
 
-        this.link = getLink(data.link);
+        this.link = getLink(`http://cassioburyrangersfc.co.uk/#/page/teams/${data.link}`);
         this.actions = data.actions || this.getStandardActions(data._id);
 
         this.checkTypes();
