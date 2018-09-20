@@ -1,8 +1,2 @@
-# footy-assistant-ui
-
-TODO
-
-- navigation for mobile
-- footer
-- reset password,
-- change password
+# CRFC Teams UI
+Libtom Software Ltd.
