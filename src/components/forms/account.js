@@ -171,9 +171,10 @@ class AccountForm extends Component {
                                         </button>
                                     </div>
                                     {this.isCurrentAccount() && <p className="standard-form-bottom">
-                                        <a href="#" onClick={this.resetPassword}>
+                                        {false && <a href="#" onClick={this.resetPassword}>
                                             Reset password
                                         </a>
+                                        }
                                         <a href="#" onClick={this.logout}>
                                             Logout
                                         </a>
