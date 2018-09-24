@@ -15,7 +15,9 @@ export function getAgeGroup(value, agegroups) {
         return '';
     }
 
-    return agegroups.find(group => group._id === value).abbreviation;
+    const ageGroup = agegroups.find(group => group._id === value);
+
+    return ageGroup ? ageGroup.abbreviation : '';
 }
 
 export function getLeague(value, leagues) {
@@ -23,7 +25,9 @@ export function getLeague(value, leagues) {
         return '';
     }
 
-    return leagues.find(group => group._id === value).abbreviation;
+    const league = leagues.find(group => group._id === value);
+
+    return league ? league.abbreviation : '';
 }
 
 export function getManagers(values, accounts) {

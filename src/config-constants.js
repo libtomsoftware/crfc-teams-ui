@@ -75,6 +75,6 @@ export const CONFIG = {
         }
     },
     URL: {
-        API: 'https://crfcapp.libtom.com/api'
+        API: 'https://crfcapp.libtom.com/api' || 'http://localhost:13503/api'
     }
 };
