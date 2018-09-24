@@ -35,7 +35,7 @@ class StandardEntityForm extends Component {
         if (this.props.group) {
             const items = this.props[this.props.group];
 
-            if (!items.length) {
+            if (!items || !items.length) {
                 this.props.actions[this.props.group].fetch();
             }
         }
